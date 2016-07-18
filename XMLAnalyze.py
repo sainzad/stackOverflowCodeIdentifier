@@ -1,18 +1,15 @@
 # Author: Andrew Sainz
 # 
-# Purpose: XMLParser is designed to iterate through a collection of Post data collected from Stack Overflow
-# 		   forums. Data collected to analize the code tagged information to find the language of the code
+# Purpose: XMLAnalyze is designed to iterate through a collection of Post data collected from Stack Overflow
+# 		   forums. Data collected to analyze the code tagged information to find the language of the code
 # 		   being utilized.
 # 
-# How to use: To run from command line input "python XMLParser.py [XML file name].xml"
+# How to use: To run from command line input "python XMLAnalyze.py Posts.xml"
 
 import xml.etree.ElementTree as ET
 import sys
 import re
 from nltk.util import ngrams
-from nltk.corpus import stopwords
-from nltk.tokenize import sent_tokenize, word_tokenize
-from nltk.classify import PositiveNaiveBayesClassifier
 
 def parseBodyForTagCode(body):
 	try:
@@ -28,81 +25,58 @@ def features(sentence):
 	words = sentence.lower().split()
 	return dict(('contains(%s)' %w, True) for w in words)
 
-# Known list tag fields
-knownJavaTags = []
-knownJavaMention = []
-knownC = []
-knownCSharp = []
-knownPython = []
+def createListOfCode(xmldoc):
+	tree = ET.parse(xmldoc)
+	root = tree.getroot()
+
+	codeList = []
+
+	for row in root:
+	# Body holds all comment information from post
+		body = row.get('Body')
+		rowId = row.get('Id')
+		# Tags for comment post
+		tags = row.get('Tags')
+		# parse body to find code tags
+		code = parseBodyForTagCode(body)
+
+		# Encode list information about code into UTF8
+		codeUni = repr([x.encode('UTF8') for x in code])
+		# If codes isn't present ignore post
+		if codeUni == '[]':
+			continue
+
+		if tags != None:
+			codeList.append(rowId+'`'+codeUni+'`'+tags)
+		else:
+			# unknown code tag is added to myList
+			codeList.append(rowId+'`'+codeUni)
+	return codeList
+
+# Ngram section
+############################################################################
+def createNgramList(codeList,size):
+	# Holds gramList for each item in codeList
+	postGramList = []
+	for item in codeList:
+		allCodeTags = [item[m.start():m.end()] for m in re.finditer('<code>(.+?)</code>', item)]
+		for code in allCodeTags:
+			cleanCode = re.sub('<code>|</code>','',code)
+			# print (cleanCode)
+			# print(classifier.classify(features(cleanCode)))
+			gramList = ngrams(cleanCode.split(), size)
+		postGramList.append(gramList)
+		# break
+	return postGramList	
 
 
 xmldoc = sys.argv[1]
 
-tree = ET.parse(xmldoc)
-root = tree.getroot()
-
-# print (root.attrib)
-myList = []
-# for each row in the xml document gather body information
-for row in root:
-	# Body holds all comment information from post
-	body = row.get('Body')
-	rowId = row.get('Id')
-	# Tags for comment post
-	tags = row.get('Tags')
-	# parse body to find code tags
-	code = parseBodyForTagCode(body)
-	
-	# Encode list information about code into UTF8
-	codeUni = repr([x.encode('UTF8') for x in code])
-	# If code isn't present ignore post move to next post
-	if codeUni == '[]':
-		continue
-
-	cleanCode = ""
-	for element in codeUni:
-		print (element is str)
-		element.decode()
-		cleanCode = element + cleanCode
-	cleanCode = re.sub('<code>|</code>','',cleanCode)
-	print (cleanCode)
-
-	if tags != None:
-		# Assign all known code to list
-		if ("<java>" in tags):
-			knownJavaTags.append(codeUni)
-		if ("<python>" in tags) or ("python" in body):
-			knownPython.append(rowId+'`'+codeUni+'`'+tags)
-		if ("<C>" in tags) or ("C" in body):
-			knownC.append(rowId+'`'+codeUni+'`'+tags)
-		if ("<C#>" in tags) or ("C#" in body):
-			knownCSharp.append(rowId+'`'+codeUni+'`'+tags)
-		# Known post tags are added to myList
-		myList.append(rowId+'`'+codeUni+'`'+tags)
-	else:
-		# unknown code tag is added to myList
-		myList.append(rowId+'`'+codeUni)
-
-	if "java" in body:
-			knownJavaMention.append(codeUni)
-
-# Assign positive features
-positive_featuresets = list(map(features, knownJavaTags))
-unlabeled_featuresets = list(map(features, knownJavaMention))
-classifier = PositiveNaiveBayesClassifier.train(positive_featuresets, unlabeled_featuresets)
-
-
-# Ngram section
+myList = createListOfCode(xmldoc)
 # print(myList)
 
-############################################################################
-for item in myList:
-	allCodeTags = [item[m.start():m.end()] for m in re.finditer('<code>(.+?)</code>', item)]
-	for code in allCodeTags:
-		cleanCode = re.sub('<code>|</code>','',code)
-		# print (cleanCode)
-		# print(classifier.classify(features(cleanCode)))
-		trigrams = ngrams(cleanCode.split(), 3)
-		# for grams in trigrams:
-	  		# print (grams)
-	# break	
+gramList = createNgramList(myList,3)
+
+for gram in gramList:
+	for snipets in gram:
+		print(snipets)
