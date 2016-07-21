@@ -62,7 +62,6 @@ def createNgramHash(codeList,size):
 		allCodeTags = [item[m.start():m.end()] for m in re.finditer('<code>(.+?)</code>', item)]
 		for code in allCodeTags:
 			cleanCode = re.sub('<code>|</code>','',code)
-			# gramHash = 
 			# gramList = ngrams(cleanCode.split(), size)
 			postGramHash.update(ngramsFunction(cleanCode, 3))
 		
@@ -93,14 +92,14 @@ def createFrequencyHash(gramHash):
 
 	return freqHash
 
+if __name__ == '__main__':
+	xmldoc = sys.argv[1]
 
-xmldoc = sys.argv[1]
+	myList = createListOfCode(xmldoc)
+	# print(myList)
 
-myList = createListOfCode(xmldoc)
-# print(myList)
+	gramHash = createNgramHash(myList,3)
+	# print(gramHash)
 
-gramHash = createNgramHash(myList,3)
-# print(gramHash)
-
-freqHash = createFrequencyHash(gramHash)
-print(freqHash)
+	freqHash = createFrequencyHash(gramHash)
+	print(freqHash)
