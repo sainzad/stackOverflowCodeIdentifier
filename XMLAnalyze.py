@@ -62,13 +62,23 @@ def createNgramList(codeList,size):
 		allCodeTags = [item[m.start():m.end()] for m in re.finditer('<code>(.+?)</code>', item)]
 		for code in allCodeTags:
 			cleanCode = re.sub('<code>|</code>','',code)
-			# print (cleanCode)
-			# print(classifier.classify(features(cleanCode)))
 			gramList = ngrams(cleanCode.split(), size)
+
 		postGramList.append(gramList)
-		# break
+		
 	return postGramList	
 
+def calculateFrequency(c,d):
+	return None
+
+def ngramsFunction(input, n):
+  input = input.split(' ')
+  output = {}
+  for i in range(len(input)-n+1):
+    g = ' '.join(input[i:i+n])
+    output.setdefault(g, 0)
+    output[g] += 1
+  return output
 
 xmldoc = sys.argv[1]
 
@@ -77,6 +87,14 @@ myList = createListOfCode(xmldoc)
 
 gramList = createNgramList(myList,3)
 
-for gram in gramList:
-	for snipets in gram:
-		print(snipets)
+test = ngramsFunction('This is a test of a test of a.',3)
+print (test)
+
+# print(gramList)
+# for gram in gramList:
+# 	postFreq = {}
+# 	print('True')
+# 	for snipets in gram:
+# 		print(snipets)
+		
+			
