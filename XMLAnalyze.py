@@ -55,46 +55,52 @@ def createListOfCode(xmldoc):
 
 # Ngram section
 ############################################################################
-def createNgramList(codeList,size):
+def createNgramHash(codeList,size):
 	# Holds gramList for each item in codeList
-	postGramList = []
+	postGramHash = {}
 	for item in codeList:
 		allCodeTags = [item[m.start():m.end()] for m in re.finditer('<code>(.+?)</code>', item)]
 		for code in allCodeTags:
 			cleanCode = re.sub('<code>|</code>','',code)
-			gramList = ngrams(cleanCode.split(), size)
-
-		postGramList.append(gramList)
+			# gramHash = 
+			# gramList = ngrams(cleanCode.split(), size)
+			postGramHash.update(ngramsFunction(cleanCode, 3))
 		
-	return postGramList	
-
-def calculateFrequency(c,d):
-	return None
+	return postGramHash	
 
 def ngramsFunction(input, n):
-  input = input.split(' ')
-  output = {}
-  for i in range(len(input)-n+1):
-    g = ' '.join(input[i:i+n])
-    output.setdefault(g, 0)
-    output[g] += 1
-  return output
+	input = input.split(' ')
+	output = {}
+	for i in range(len(input)-n+1):
+	    g = ' '.join(input[i:i+n])
+	    output.setdefault(g, 0)
+	    output[g] += 1
+
+	return output
+	  
+
+def calculateFrequency(size,value):
+	return value/size
+
+def createFrequencyHash(gramHash):
+	freqHash = {}
+	gramHashSize = len(gramHash)
+
+	for key in gramHash.keys():
+		gramValue = gramHash[key]
+		freq = calculateFrequency(gramHashSize,gramValue)
+		freqHash.update({key:freq})
+
+	return freqHash
+
 
 xmldoc = sys.argv[1]
 
 myList = createListOfCode(xmldoc)
 # print(myList)
 
-gramList = createNgramList(myList,3)
+gramHash = createNgramHash(myList,3)
+# print(gramHash)
 
-test = ngramsFunction('This is a test of a test of a.',3)
-print (test)
-
-# print(gramList)
-# for gram in gramList:
-# 	postFreq = {}
-# 	print('True')
-# 	for snipets in gram:
-# 		print(snipets)
-		
-			
+freqHash = createFrequencyHash(gramHash)
+print(freqHash)
