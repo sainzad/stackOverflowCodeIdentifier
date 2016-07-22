@@ -7,5 +7,9 @@ class TestStringMethods(unittest.TestCase):
         xmldoc = 'Posts2.xml'
         self.assertTrue(createListOfCode(xmldoc),None)
 
+    def test_listOfCodeSample(self):
+        xmldoc = 'PostsSample.xml'
+        self.assertTrue(createListOfCode(xmldoc),None)
+
 if __name__ == '__main__':
     unittest.main()
