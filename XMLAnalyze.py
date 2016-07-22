@@ -53,6 +53,20 @@ def createListOfCode(xmldoc):
 			codeList.append(rowId+'`'+codeUni)
 	return codeList
 
+def gatherKnownTags(givenList, searchLanguage):
+	knownList = []
+
+	for entry in givenList:
+		try:
+			print(searchLanguage.lower())
+			print(searchLanguage.lower() in entry.lower())
+			if searchLanguage.lower() in entry.lower():
+				knownList.append(entry)
+		except:
+			# Pass if there were no tags in the entry
+			pass
+	return knownList
+
 # Ngram section
 ############################################################################
 def createNgramHash(codeList,size):
@@ -98,8 +112,12 @@ if __name__ == '__main__':
 	myList = createListOfCode(xmldoc)
 	# print(myList)
 
+	gatherKnownJava = gatherKnownTags(myList, 'java')
+	print(gatherKnownJava)
+
 	gramHash = createNgramHash(myList,3)
 	# print(gramHash)
 
 	freqHash = createFrequencyHash(gramHash)
-	print(freqHash)
+	# print(freqHash)
+
