@@ -18,16 +18,32 @@ def features(sentence):
 
 if __name__ == '__main__':
 	xmldoc = sys.argv[1]
+	comments = sys.argv[2]
 
-	myList = createListOfCode(xmldoc)
-	# print(myList)
+	myHash = createHash(xmldoc,comments)# createListOfCode(xmldoc)
+	# print(len(myHash))
 
-	gatherKnownJava = gatherKnownTags(myList, 'java')
-	print(gatherKnownJava)
+	javaSearchTerms = ['java','system.out']
+	gatherKnownJava = gatherKnown(myHash, javaSearchTerms)
+	# print(len(gatherKnownJava))
 
-	gramHash = createNgramHash(myList,3)
-	# print(gramHash)
+	gramHash = createNgramHash(myHash,3)
+	# print(len(gramHash))
+
+	# for key,value in gramHash.items():
+	# 	try:
+	# 		if value > 1:
+	# 			print(key)
+	# 	except:
+	# 		pass
 
 	freqHash = createFrequencyHash(gramHash)
-	# print(freqHash)
+	# print(len(freqHash))
 
+	# for key,value in freqHash.items():
+	# 	try:
+	# 		if value > .00018:
+	# 			print(key)
+	# 			print (value)
+	# 	except:
+	# 		pass

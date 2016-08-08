@@ -1,11 +1,11 @@
 import sys
 import re
 
-def createNgramHash(codeList,size):
+def createNgramHash(inputHash,size):
 	# Holds gramList for each item in codeList
 	postGramHash = {}
-	for item in codeList:
-		allCodeTags = [item[m.start():m.end()] for m in re.finditer('<code>(.+?)</code>', item)]
+	for key,value in inputHash.items():
+		allCodeTags = [value[m.start():m.end()] for m in re.finditer('<code>(.+?)</code>', value)]
 		for code in allCodeTags:
 			cleanCode = re.sub('<code>|</code>','',code)
 			# gramList = ngrams(cleanCode.split(), size)

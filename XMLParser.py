@@ -12,44 +12,57 @@ def parseBodyForTagCode(body):
 		code = None
 	return code
 
-def createListOfCode(xmldoc):
+def createHash(xmldoc,comments):
 	tree = ET.parse(xmldoc)
 	root = tree.getroot()
 
-	codeList = []
+	myHash = {}
+	myHashOut = {}
 
 	for row in root:
-	# Body holds all comment information from post
 		body = row.get('Body')
-		rowId = row.get('Id')
+		postId = row.get('Id')
 		# Tags for comment post
-		tags = row.get('Tags')
-		# parse body to find code tags
-		code = parseBodyForTagCode(body)
-
-		# Encode list information about code into UTF8
-		codeUni = repr([x.encode('UTF8') for x in code])
-		# If codes isn't present ignore post
-		if codeUni == '[]':
-			continue
-
+		tags = row.get('Tags')	
+		
 		if tags != None:
-			codeList.append(rowId+'`'+codeUni+'`'+tags)
+			value = body+'`'+tags
+			myHash.update({postId:value})
+			# myList.append(rowId+'`'+body+'`'+tags)
 		else:
 			# unknown code tag is added to myList
-			codeList.append(rowId+'`'+codeUni)
-	return codeList
+			myHash.update({postId:body})
+			# myList.append(rowId+'`'+body)
 
-def gatherKnownTags(givenList, searchLanguage):
-	knownList = []
+	myHashOut = addCommentsToHash(myHash,comments)
+	# print(len(myHash))
+	return myHashOut
 
-	for entry in givenList:
+def addCommentsToHash(myHash,comments):
+	commentTree = ET.parse(comments)
+	commentRoot = commentTree.getroot()
+	myHashCom = {}
+
+	for row in commentRoot:
+		parentPostId = row.get('PostId')
+		commentBody = row.get('Text')
+		hashValue = myHash.get(parentPostId)
+		# If post key can be found add comment information to value
 		try:
-			print(searchLanguage.lower())
-			print(searchLanguage.lower() in entry.lower())
-			if searchLanguage.lower() in entry.lower():
-				knownList.append(entry)
+			myHash.put({parentPostId:hashValue+'`'+commentBody})
 		except:
-			# Pass if there were no tags in the entry
 			pass
-	return knownList
+
+	myHashCom = myHash
+	return myHashCom
+
+def gatherKnown(givenHash, searchTerms):
+	knownHash = {}
+
+	for key,value in givenHash.items():
+		# print(searchLanguage.lower())
+		# print(searchLanguage.lower() in entry.lower())
+		for term in searchTerms:
+			if term.lower() in value.lower():
+				knownHash.update({key:value})
+	return knownHash
