@@ -23,9 +23,12 @@ if __name__ == '__main__':
 	myHash = createHash(xmldoc,comments)# createListOfCode(xmldoc)
 	# print(len(myHash))
 
-	javaSearchTerms = ['java','system.out']
+	javaSearchTerms = ['java','system.out','enum']
 	gatherKnownJava = gatherKnown(myHash, javaSearchTerms)
-	# print(len(gatherKnownJava))
+	print(len(gatherKnownJava))
+
+	# for key, value in gatherKnownJava.items():
+	# 	print(key)
 
 	gramHash = createNgramHash(myHash,3)
 	# print(len(gramHash))

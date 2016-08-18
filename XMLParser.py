@@ -21,18 +21,18 @@ def createHash(xmldoc,comments):
 
 	for row in root:
 		body = row.get('Body')
-		postId = row.get('Id')
-		# Tags for comment post
-		tags = row.get('Tags')	
-		
-		if tags != None:
-			value = body+'`'+tags
-			myHash.update({postId:value})
-			# myList.append(rowId+'`'+body+'`'+tags)
-		else:
-			# unknown code tag is added to myList
-			myHash.update({postId:body})
-			# myList.append(rowId+'`'+body)
+		# Only allow posts with a code tag to be added
+		if '<code>' in body:
+			postId = row.get('Id')
+			# Tags for comment post
+			tags = row.get('Tags')	
+			
+			if tags != None:
+				value = body+'`'+tags
+				myHash.update({postId:value})
+			else:
+				# unknown code tag is added to myList
+				myHash.update({postId:body})
 
 	myHashOut = addCommentsToHash(myHash,comments)
 	# print(len(myHash))
@@ -56,6 +56,9 @@ def addCommentsToHash(myHash,comments):
 	myHashCom = myHash
 	return myHashCom
 
+def findWholeWord(s,w):
+    return (' ' + w + ' ') in (' ' + s + ' ')
+
 def gatherKnown(givenHash, searchTerms):
 	knownHash = {}
 
@@ -63,6 +66,6 @@ def gatherKnown(givenHash, searchTerms):
 		# print(searchLanguage.lower())
 		# print(searchLanguage.lower() in entry.lower())
 		for term in searchTerms:
-			if term.lower() in value.lower():
+			if findWholeWord(value.lower(), term.lower()):
 				knownHash.update({key:value})
 	return knownHash
