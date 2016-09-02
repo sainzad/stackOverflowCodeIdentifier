@@ -8,6 +8,8 @@
 
 import sys
 import re
+import os
+from nltk.util import ngrams
 from ngramFunctions import *
 from XMLParser import *
 from frequencyFunctions import *
@@ -19,13 +21,41 @@ def features(sentence):
 if __name__ == '__main__':
 	xmldoc = sys.argv[1]
 	comments = sys.argv[2]
+	knownText = sys.argv[3]
+###################################################################
+# Section 1: Gather known data to create frequencies for known information
+###################################################################
+	knownJavaFile = open(knownText)
+	knownJavaString = ""
+	for line in knownJavaFile:
+		knownJavaString += line
 
+	knownJavaString = os.linesep.join([s for s in knownJavaString.splitlines() if s])
+	knownJavaString = re.sub('\\n|\\r|/\s\s+/g','',knownJavaString)
+	print(knownJavaString)
+	# knownJavaGram = {}
+	knownJavaList = ngrams(knownJavaString.split(' '),3)#ngramsFunction(knownJavaString, 3)
+	# for gram in knownJavaList:
+		# print(gram)
+	# for key, value in knownJavaGram.items():
+	# 	print(key)
+	# 	print(value)
+
+	# knownJavaFreq = createFrequencyHash(knownJavaGram)
+	# for key, value in knownJavaFreq.items():
+	# 	print(key)
+	# 	print(value)
+
+
+###################################################################
+# Section 2: Compare with known ngrams of code
+###################################################################
 	myHash = createHash(xmldoc,comments)# createListOfCode(xmldoc)
 	# print(len(myHash))
 
-	javaSearchTerms = ['java','system.out','enum']
-	gatherKnownJava = gatherKnown(myHash, javaSearchTerms)
-	print(len(gatherKnownJava))
+	# javaSearchTerms = ['java','system.out','enum']
+	# gatherKnownJava = gatherKnown(myHash, javaSearchTerms)
+	# print(len(gatherKnownJava))
 
 	# for key, value in gatherKnownJava.items():
 	# 	print(key)
@@ -40,7 +70,7 @@ if __name__ == '__main__':
 	# 	except:
 	# 		pass
 
-	freqHash = createFrequencyHash(gramHash)
+	# freqHash = createFrequencyHash(gramHash)
 	# print(len(freqHash))
 
 	# for key,value in freqHash.items():

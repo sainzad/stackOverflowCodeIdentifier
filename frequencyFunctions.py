@@ -14,3 +14,15 @@ def createFrequencyHash(gramHash):
 		freqHash.update({key:freq})
 
 	return freqHash
+
+def ngramProbability(knownHash, dataHash, dataHashKey):
+	prob = 0
+	knownValue = knownHash.get(dataHashKey);
+	dataHashValue = dataHash.get(dataHashKey);
+
+	try:
+		prob = dataHashValue/knownValue
+	except:
+		prob = -999
+
+	return prob
