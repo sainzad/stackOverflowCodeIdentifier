@@ -22,6 +22,7 @@ if __name__ == '__main__':
 	xmldoc = sys.argv[1]
 	comments = sys.argv[2]
 	knownText = sys.argv[3]
+	testFile = sys.argv[4]
 ###################################################################
 # Section 1: Gather known data to create frequencies for known information
 ###################################################################
@@ -42,10 +43,11 @@ if __name__ == '__main__':
 	# 	print(key)
 	# 	print(value)
 
+	# Shows frequency vs. total only towards known language
 	knownJavaFreq = createFrequencyHash(knownJavaGram)
-	for key, value in knownJavaFreq.items():
-		print(key)
-		print(value)
+	# for key, value in knownJavaFreq.items():
+	# 	print(key)
+	# 	print(value)
 
 
 ###################################################################
@@ -54,22 +56,27 @@ if __name__ == '__main__':
 	# myHash = createHash(xmldoc,comments)# createListOfCode(xmldoc)
 	# print(len(myHash))
 
-	# javaSearchTerms = ['java','system.out','enum']
-	# gatherKnownJava = gatherKnown(myHash, javaSearchTerms)
-	# print(len(gatherKnownJava))
 
-	# for key, value in gatherKnownJava.items():
-	# 	print(key)
+	test = open(testFile)
+	testString = ""
+	for line in test:
+		testString += line
 
+	testString = os.linesep.join([s for s in testString.splitlines() if s])
+	testString = re.sub('\\n|\\r|/\s\s+/g}','',testString)
+	testString = re.sub(' +', ' ', testString)
+
+	testGram = ngramsFunction(testString,3)
+
+	for key, value in testGram.items():
+		if knownJavaGram.get(key) != None:
+			print('found match')
+	# Holds ngram of posts.xml file
 	# gramHash = createNgramHash(myHash,3)
 	# print(len(gramHash))
 
 	# for key,value in gramHash.items():
-	# 	try:
-	# 		if value > 1:
-	# 			print(key)
-	# 	except:
-	# 		pass
+	# 	print(key)
 
 	# freqHash = createFrequencyHash(gramHash)
 	# print(len(freqHash))

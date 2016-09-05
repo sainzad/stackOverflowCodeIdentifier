@@ -34,9 +34,9 @@ def createHash(xmldoc,comments):
 				# unknown code tag is added to myList
 				myHash.update({postId:body})
 
-	myHashOut = addCommentsToHash(myHash,comments)
+	# myHashOut = addCommentsToHash(myHash,comments)
 	# print(len(myHash))
-	return myHashOut
+	return myHash
 
 def addCommentsToHash(myHash,comments):
 	commentTree = ET.parse(comments)
