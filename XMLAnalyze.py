@@ -31,26 +31,27 @@ if __name__ == '__main__':
 		knownJavaString += line
 
 	knownJavaString = os.linesep.join([s for s in knownJavaString.splitlines() if s])
-	knownJavaString = re.sub('\\n|\\r|/\s\s+/g','',knownJavaString)
-	print(knownJavaString)
-	# knownJavaGram = {}
-	knownJavaList = ngrams(knownJavaString.split(' '),3)#ngramsFunction(knownJavaString, 3)
+	knownJavaString = re.sub('\\n|\\r|/\s\s+/g}','',knownJavaString)
+	knownJavaString = re.sub(' +', ' ', knownJavaString)
+	# print(knownJavaString)
+	knownJavaGram = ngramsFunction(knownJavaString, 3)
+	# knownJavaList = ngrams(knownJavaString.split(' '),3)#ngramsFunction(knownJavaString, 3)
 	# for gram in knownJavaList:
-		# print(gram)
+		# knownJavaGram.update({gram});
 	# for key, value in knownJavaGram.items():
 	# 	print(key)
 	# 	print(value)
 
-	# knownJavaFreq = createFrequencyHash(knownJavaGram)
-	# for key, value in knownJavaFreq.items():
-	# 	print(key)
-	# 	print(value)
+	knownJavaFreq = createFrequencyHash(knownJavaGram)
+	for key, value in knownJavaFreq.items():
+		print(key)
+		print(value)
 
 
 ###################################################################
 # Section 2: Compare with known ngrams of code
 ###################################################################
-	myHash = createHash(xmldoc,comments)# createListOfCode(xmldoc)
+	# myHash = createHash(xmldoc,comments)# createListOfCode(xmldoc)
 	# print(len(myHash))
 
 	# javaSearchTerms = ['java','system.out','enum']
@@ -60,7 +61,7 @@ if __name__ == '__main__':
 	# for key, value in gatherKnownJava.items():
 	# 	print(key)
 
-	gramHash = createNgramHash(myHash,3)
+	# gramHash = createNgramHash(myHash,3)
 	# print(len(gramHash))
 
 	# for key,value in gramHash.items():
