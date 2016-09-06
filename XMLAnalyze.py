@@ -9,6 +9,7 @@
 import sys
 import re
 import os
+import nltk 
 from nltk.util import ngrams
 from ngramFunctions import *
 from XMLParser import *
@@ -31,20 +32,16 @@ if __name__ == '__main__':
 	for line in knownJavaFile:
 		knownJavaString += line
 
-	knownJavaString = os.linesep.join([s for s in knownJavaString.splitlines() if s])
-	knownJavaString = re.sub('\\n|\\r|/\s\s+/g}','',knownJavaString)
-	knownJavaString = re.sub(' +', ' ', knownJavaString)
-	# print(knownJavaString)
-	knownJavaGram = ngramsFunction(knownJavaString, 3)
-	# knownJavaList = ngrams(knownJavaString.split(' '),3)#ngramsFunction(knownJavaString, 3)
-	# for gram in knownJavaList:
-		# knownJavaGram.update({gram});
-	# for key, value in knownJavaGram.items():
+	# knownJavaGram = ngramsFunction(knownJavaString, 3)
+	knownJavaGram = ngrams(knownJavaString.split(' '),3)#ngramsFunction(knownJavaString, 3)
+	knownJavaHashFreq = nltk.FreqDist(knownJavaGram)
+
+	# for key, value in knownJavaHash.items():
 	# 	print(key)
 	# 	print(value)
 
 	# Shows frequency vs. total only towards known language
-	knownJavaFreq = createFrequencyHash(knownJavaGram)
+	# knownJavaFreq = createFrequencyHash(knownJavaGram)
 	# for key, value in knownJavaFreq.items():
 	# 	print(key)
 	# 	print(value)
@@ -64,13 +61,15 @@ if __name__ == '__main__':
 
 	testString = os.linesep.join([s for s in testString.splitlines() if s])
 	testString = re.sub('\\n|\\r|/\s\s+/g}','',testString)
-	testString = re.sub(' +', ' ', testString)
+	testString = re.sub(' +|.', ' ', testString)
 
-	testGram = ngramsFunction(testString,3)
+	testList = ngrams(testString.split(' '),3)
+	testGram = nltk.FreqDist(testList)
 
 	for key, value in testGram.items():
-		if knownJavaGram.get(key) != None:
-			print('found match')
+		if knownJavaHashFreq.get(key) != None:
+			print(calculateFrequency(int(knownJavaHashFreq.get(key)),value))
+			print(key)
 	# Holds ngram of posts.xml file
 	# gramHash = createNgramHash(myHash,3)
 	# print(len(gramHash))
