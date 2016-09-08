@@ -1,23 +1,11 @@
-import java.util.TreeSet;
-import java.util.SortedSet;
- 
-public class GetSubSetFromTreeSetExample {
- 
-  public static void main(String[] args) {
- 
-    TreeSet tSet = new TreeSet();
-   
-    tSet.add("1");
-    tSet.add("3");
-    tSet.add("2");
-    tSet.add("5");
-    tSet.add("4");
-   
-    SortedSet sortedSet = tSet.subSet("2","5");
-   
-    System.out.println("SortedSet Contains : " + sortedSet);
-   
-   
-  }
+Charset charset = Charset.forName("US-ASCII");
+String s = ...;
+BufferedWriter writer = null;
+try {
+    writer = Files.newBufferedWriter(file, charset);
+    writer.write(s, 0, s.length());
+} catch (IOException x) {
+    System.err.format("IOException: %s%n", x);
+} finally {
+    if (writer != null) writer.close();
 }
- 

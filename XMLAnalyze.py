@@ -36,7 +36,8 @@ if __name__ == '__main__':
 	knownJavaGram = ngrams(knownJavaString.split(' '),3)#ngramsFunction(knownJavaString, 3)
 	knownJavaHashFreq = nltk.FreqDist(knownJavaGram)
 
-	# for key, value in knownJavaHash.items():
+
+	# for key, value in knownJavaHashFreq.items():
 	# 	print(key)
 	# 	print(value)
 
@@ -67,9 +68,11 @@ if __name__ == '__main__':
 	testGram = nltk.FreqDist(testList)
 
 	for key, value in testGram.items():
+		print(key)
 		if knownJavaHashFreq.get(key) != None:
 			print(calculateFrequency(int(knownJavaHashFreq.get(key)),value))
-			print(key)
+			print(int(knownJavaHashFreq.get(key)))
+			print(value)
 	# Holds ngram of posts.xml file
 	# gramHash = createNgramHash(myHash,3)
 	# print(len(gramHash))
