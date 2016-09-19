@@ -24,6 +24,7 @@ if __name__ == '__main__':
 	comments = sys.argv[2]
 	knownText = sys.argv[3]
 	testFile = sys.argv[4]
+	knownCpp = sys.argv[5]
 ###################################################################
 # Section 1: Gather known data to create frequencies for known information
 ###################################################################
@@ -36,14 +37,20 @@ if __name__ == '__main__':
 	knownJavaGram = ngrams(knownJavaString.split(' '),3)#ngramsFunction(knownJavaString, 3)
 	knownJavaHashFreq = nltk.FreqDist(knownJavaGram)
 
+	knownCPPFile = open(knownCpp)
+	knownCPPString = ""
+	for line in knownCPPFile:
+		knownCPPString += line
+
+	# print(knownCPPString)
+	knownCPPGram = ngrams(knownCPPString.split(' '),3)
+	knownCPPHashFreq = nltk.FreqDist(knownCPPGram)
+
+	# for key, value in knownCPPHashFreq.items():
+	# 	print(key)
+
 
 	# for key, value in knownJavaHashFreq.items():
-	# 	print(key)
-	# 	print(value)
-
-	# Shows frequency vs. total only towards known language
-	# knownJavaFreq = createFrequencyHash(knownJavaGram)
-	# for key, value in knownJavaFreq.items():
 	# 	print(key)
 	# 	print(value)
 
@@ -61,32 +68,43 @@ if __name__ == '__main__':
 		testString += line
 
 	testString = os.linesep.join([s for s in testString.splitlines() if s])
-	testString = re.sub('\\n|\\r|/\s\s+/g}','',testString)
-	testString = re.sub(' +|.', ' ', testString)
-
+	testString = re.sub('\\n|\\r|/\s\s+/g}',' ',testString)
+	testString = re.sub(' +|\.', ' ', testString)
+	testString = re.sub( '\s+', ' ', testString ).strip()
+	
 	testList = ngrams(testString.split(' '),3)
 	testGram = nltk.FreqDist(testList)
 
+
+#############################################################################################
+# This is where a comparison of frequencies vs. ngram will be made. 
+# The higher the frequency language gram will be selected and added towards langauge total. 
+#############################################################################################
+	totalCpp = 0
+	totalJava = 0
+
 	for key, value in testGram.items():
-		print(key)
-		if knownJavaHashFreq.get(key) != None:
-			print(calculateFrequency(int(knownJavaHashFreq.get(key)),value))
-			print(int(knownJavaHashFreq.get(key)))
-			print(value)
-	# Holds ngram of posts.xml file
-	# gramHash = createNgramHash(myHash,3)
-	# print(len(gramHash))
+		# print(key)
+		if(knownJavaHashFreq.get(key) == None and knownCPPHashFreq.get(key) != None):
+			# print('C++')
+			totalCpp += 1
+		if(knownJavaHashFreq.get(key) != None and knownCPPHashFreq.get(key) == None):
+			# print('java')
+			totalJava += 1
+		if knownJavaHashFreq.get(key) != None and knownCPPHashFreq.get(key) != None:
+			javaFreq = calculateFrequency(int(knownJavaHashFreq.get(key)),value)
+			cppFreq = calculateFrequency(int(knownCPPHashFreq.get(key)), value)
 
-	# for key,value in gramHash.items():
-	# 	print(key)
+			if(javaFreq > cppFreq):
+				# print('java')
+				totalJava += 1
+			else:
+				# print('C++')
+				totalCpp += 1
+		# print(key)
 
-	# freqHash = createFrequencyHash(gramHash)
-	# print(len(freqHash))
-
-	# for key,value in freqHash.items():
-	# 	try:
-	# 		if value > .00018:
-	# 			print(key)
-	# 			print (value)
-	# 	except:
-	# 		pass
+	print('C++ tags: {}'.format(totalCpp))
+	print('Java tags: {}'.format(totalJava))
+			# print(knownJavaHashFreq.get(key))
+			# print(calculateFrequency(int(knownJavaHashFreq.get(key)),value))
+			# print(key)
