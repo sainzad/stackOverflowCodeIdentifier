@@ -46,14 +46,6 @@ if __name__ == '__main__':
 	knownCPPGram = ngrams(knownCPPString.split(' '),3)
 	knownCPPHashFreq = nltk.FreqDist(knownCPPGram)
 
-	# for key, value in knownCPPHashFreq.items():
-	# 	print(key)
-
-
-	# for key, value in knownJavaHashFreq.items():
-	# 	print(key)
-	# 	print(value)
-
 
 ###################################################################
 # Section 2: Compare with known ngrams of code
@@ -69,42 +61,29 @@ if __name__ == '__main__':
 
 	testString = os.linesep.join([s for s in testString.splitlines() if s])
 	testString = re.sub('\\n|\\r|/\s\s+/g}',' ',testString)
-	testString = re.sub(' +|\.', ' ', testString)
+	testString = re.sub('\.', ' ', testString)
+	testString = re.sub('\\t', '',testString)
+	testString = re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,testString)
+	testString = re.sub(re.compile("//.*?\n" ) ,"" ,testString)
+	testString = re.sub( '[^0-9a-zA-Z]+', ' ', testString )
 	testString = re.sub( '\s+', ' ', testString ).strip()
 	
 	testList = ngrams(testString.split(' '),3)
 	testGram = nltk.FreqDist(testList)
 
+	# print(testString)
 
+	
 #############################################################################################
-# This is where a comparison of frequencies vs. ngram will be made. 
-# The higher the frequency language gram will be selected and added towards langauge total. 
+# Section to calculate trigram Probability
 #############################################################################################
-	totalCpp = 0
-	totalJava = 0
+	kneserJava = nltk.KneserNeyProbDist(knownJavaHashFreq)
+	kneserCPP = nltk.KneserNeyProbDist(knownCPPHashFreq)
 
-	for key, value in testGram.items():
-		# print(key)
-		if(knownJavaHashFreq.get(key) == None and knownCPPHashFreq.get(key) != None):
-			# print('C++')
-			totalCpp += 1
-		if(knownJavaHashFreq.get(key) != None and knownCPPHashFreq.get(key) == None):
-			# print('java')
-			totalJava += 1
-		if knownJavaHashFreq.get(key) != None and knownCPPHashFreq.get(key) != None:
-			javaFreq = calculateFrequency(int(knownJavaHashFreq.get(key)),value)
-			cppFreq = calculateFrequency(int(knownCPPHashFreq.get(key)), value)
-
-			if(javaFreq > cppFreq):
-				# print('java')
-				totalJava += 1
-			else:
-				# print('C++')
-				totalCpp += 1
-		# print(key)
-
-	print('C++ tags: {}'.format(totalCpp))
-	print('Java tags: {}'.format(totalJava))
-			# print(knownJavaHashFreq.get(key))
-			# print(calculateFrequency(int(knownJavaHashFreq.get(key)),value))
-			# print(key)
+	kneserJavaHash = convertProbListToHash(kneserJava)
+	kneserCPPHash = convertProbListToHash(kneserCPP)
+	
+	for gram in testGram:
+		if(kneserCPPHash.get(gram) != None or kneserJavaHash.get(gram) != None):
+			print('gram: {}'.format(gram))
+			# break
