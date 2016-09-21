@@ -83,7 +83,22 @@ if __name__ == '__main__':
 	kneserJavaHash = convertProbListToHash(kneserJava)
 	kneserCPPHash = convertProbListToHash(kneserCPP)
 	
+	cpp = 0
+	java = 0
+
 	for gram in testGram:
-		if(kneserCPPHash.get(gram) != None or kneserJavaHash.get(gram) != None):
-			print('gram: {}'.format(gram))
-			# break
+		cppValue = kneserCPPHash.get(str(gram))
+		javaValue = kneserJavaHash.get(str(gram)) 
+
+		if cppValue != None and javaValue != None:
+			if cppValue > javaValue:
+				cpp += 1
+			else:
+				java += 1
+		elif cppValue == None and javaValue != None:
+			java += 1
+		elif cppValue != None and javaValue == None:
+			cpp += 1
+
+	print('Grams assigned as followed:')
+	print('C++: {} Java: {}'.format(cpp,java))
