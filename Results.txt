@@ -17,9 +17,9 @@ Snippet determined to be inconclusive
 Tags include <java><exceptions>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 3
 Code: java nio channels SocketChannel open gt connect gt read gt read gt close java io PrintStream java util Iterator next remove
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><api>
 
 Grams assigned as followed:
@@ -47,9 +47,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><performance><code-organization>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: new new new new new new new Object o new Object Object o Object new new new new new
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <programming-languages><java><c++><javascript><syntax>
 
 Grams assigned as followed:
@@ -83,9 +83,9 @@ Snippet determined to be inconclusive
 Tags include <javascript>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: docroot admin webapp zip http example com admin web zip zip
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><web-applications><naming><file-extension>
 
 Grams assigned as followed:
@@ -119,7 +119,7 @@ Snippet determined to be inconclusive
 Tags include <java><exceptions>
 
 Grams assigned as followed:
-C++: 0 Java: 1
+C++: 0 Java: 2
 Code: java io Reader java io PushbackReader java io BufferedReader java io FilterReader PushbackReader BufferedReader FilterReader BufferedPushbackFilterReader
 Snippet determined to be Java
 Tags include <java><design-patterns>
@@ -143,9 +143,9 @@ Snippet determined to be inconclusive
 Tags include <java><mvc><swing>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: HttpServletRequest getParameters String String String Long Long valueOf
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><type-conversion>
 
 Grams assigned as followed:
@@ -185,9 +185,9 @@ Snippet determined to be C++
 Tags include <javascript><jquery><prototyping>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: Boolean true false null null true false ALL EnumSet EnumSet EnumSet EnumSet ALL ViewStatus isViewed
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><enum>
 
 Grams assigned as followed:
@@ -203,7 +203,7 @@ Snippet determined to be inconclusive
 Tags include <java><design><object-oriented>
 
 Grams assigned as followed:
-C++: 0 Java: 4
+C++: 0 Java: 6
 Code: null None return null String name null return null return null ArrayList lt ArrayList gt
 Snippet determined to be Java
 Tags include <java><python>
@@ -725,7 +725,7 @@ Snippet determined to be inconclusive
 Tags include <java><programming-practices><version-control><git><maven>
 
 Grams assigned as followed:
-C++: 4 Java: 0
+C++: 4 Java: 1
 Code: 1 2 3 4 2 3 4 1 1 1 1 3 id1 1 100 id2 2 50 id3 2 50 id4 4 25 gt id3 1 150 id1 2 100 id4 3 75 id2 4 50
 Snippet determined to be C++
 Tags include <javascript><algorithms><html><client-side>
@@ -779,7 +779,7 @@ Snippet determined to be Java
 Tags include <javascript><python><language-features>
 
 Grams assigned as followed:
-C++: 0 Java: 2
+C++: 0 Java: 4
 Code: PANDORA DB System out println System err println e printStackTrace toString toString
 Snippet determined to be Java
 Tags include <java><logging>
@@ -815,9 +815,9 @@ Snippet determined to be inconclusive
 Tags include <java><web-applications>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: Set getName org apache commons collections CollectionUtils org apache commons collections Transformer
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><design-patterns><functional-programming>
 
 Grams assigned as followed:
@@ -869,9 +869,9 @@ Snippet determined to be inconclusive
 Tags include <java><c++><theory><class-design><scope>
 
 Grams assigned as followed:
-C++: 1 Java: 1
+C++: 0 Java: 2
 Code: static final define define REP i n for typeof n i 0 i lt n i REP i 10 for i 0 i lt 10 i define REP i n for typeof n i 0 i lt n i static final
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><c++>
 
 Grams assigned as followed:
@@ -887,9 +887,9 @@ Snippet determined to be inconclusive
 Tags include <java><design-patterns>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: document write s substr s length 1 1 264DTDSJQU 2631MBOHVBHF 264E 2633kbwbtdsjqu 2633 264F 261Bbmfsu 2639 2638Ifmmp 2631Xpsme 2638 263 3A 264C 261B 264D0TDSJQU 264F 261B 261 3A 261 3A 261 3A1 amp 4DTDSJQU amp 31MBOHVBHF amp 4E amp 33kbwbtdsjqu amp 33 amp 4F amp 1Bbmfsu amp 39 amp 38Ifmmp amp 31Xpsme amp 38 amp 3 amp 4C amp 1B amp 4D0TDSJQU amp 4F amp 1B amp 1 amp 1 amp 1 1
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <javascript><text-encoding>
 
 Grams assigned as followed:
@@ -935,13 +935,13 @@ Snippet determined to be inconclusive
 Tags include <javascript><html5><animation>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: public void handle Exception ex instanceof RuntimeException public void handle Exception ex
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><object-oriented><design-patterns><exception-handling>
 
 Grams assigned as followed:
-C++: 0 Java: 1
+C++: 0 Java: 2
 Code: private static final boolean DEBUG false
 Snippet determined to be Java
 Tags include <java><testing><logging><debugging>
@@ -983,9 +983,9 @@ Snippet determined to be inconclusive
 Tags include <java><eclipse><maven>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: If thread t was removed from m s wait set in step 2 due to an interrupt Thread t does not execute any further instructions until it has been removed from m s wait set
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><multithreading><concurrency>
 
 Grams assigned as followed:
@@ -1229,9 +1229,9 @@ Snippet determined to be inconclusive
 Tags include <java><coding-style><assertions>
 
 Grams assigned as followed:
-C++: 1 Java: 1
+C++: 1 Java: 2
 Code: lt lt gt gt gt gt gt amp var c a b a c ToBoolean a b c a a b a b
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <javascript><language-design><history>
 
 Grams assigned as followed:
@@ -1241,9 +1241,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><jquery>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: add E e offer E e
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><collections>
 
 Grams assigned as followed:
@@ -1355,9 +1355,9 @@ Snippet determined to be inconclusive
 Tags include <java><design><design-patterns>
 
 Grams assigned as followed:
-C++: 1 Java: 0
+C++: 1 Java: 2
 Code: InputStream read read int read int read byte b InputStream Queue
-Snippet determined to be C++
+Snippet determined to be Java
 Tags include <java><data-structures>
 
 Grams assigned as followed:
@@ -1463,21 +1463,21 @@ Snippet determined to be inconclusive
 Tags include <java><design-patterns><programming-practices><encapsulation>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: TriggerManager TimedTriggerManager TimedTriggerManager TimedTrigger Trigger TriggerManager Trigger TimedTriggerManager TimedTriggers TriggerManager public void addTrigger Trigger t TimedTriggerManager t TimedTrigger getTimedTrigger getTrigger Trigger
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><design><programming-practices><polymorphism>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: modify the software under the terms of the GNU General Public License version 2
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><licensing><open-source><gpl><legal>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 3
 Code: org apache commons lang3 BooleanUtils isFalse Boolean bool isTrue Boolean null Boolean TRUE equals bool Boolean FALSE equals bool isReady
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><programming-practices><apache>
 
 Grams assigned as followed:
@@ -1673,9 +1673,9 @@ Snippet determined to be inconclusive
 Tags include <java><compiler><method-overloading>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 3
 Code: System in System out System getIn System getOut
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><object-oriented><encapsulation>
 
 Grams assigned as followed:
@@ -1727,9 +1727,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><web-applications><performance><ajax><client-side>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 6
 Code: public void authenticate String username String password private void invokeServer String username String password NullPointerException invokeServer authenticate
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><exceptions>
 
 Grams assigned as followed:
@@ -1805,15 +1805,15 @@ Snippet determined to be inconclusive
 Tags include <java><design-patterns>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: while true while 1 for do do while do while while true for
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><c><loops><thread>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: out close out close out close
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><exceptions>
 
 Grams assigned as followed:
@@ -1925,9 +1925,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><jquery><editor><cross-browser><wysiwyg>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: request getSession getAttribute name
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><design><session><jee>
 
 Grams assigned as followed:
@@ -1967,9 +1967,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><php><mysql>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: apple a p p apple 6a8jxo lt tenant gt 6 a 6 6a8jxo lt tenant gt aa bbb aa bbb
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><file-storage>
 
 Grams assigned as followed:
@@ -1979,9 +1979,9 @@ Snippet determined to be inconclusive
 Tags include <java><design><object-oriented>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: java lang String example example trim String example null String String
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><api-design><null>
 
 Grams assigned as followed:
@@ -2057,7 +2057,7 @@ Snippet determined to be inconclusive
 Tags include <javascript><front-end>
 
 Grams assigned as followed:
-C++: 0 Java: 2
+C++: 0 Java: 4
 Code: java util logging System out println System err println
 Snippet determined to be Java
 Tags include <java><logging>
@@ -2141,9 +2141,9 @@ Snippet determined to be inconclusive
 Tags include <design-patterns><javascript><chess>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: String format Object clone String format
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><object-oriented><documentation><methods>
 
 Grams assigned as followed:
@@ -2177,9 +2177,9 @@ Snippet determined to be inconclusive
 Tags include <java>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: Comparable lt T extends Comparable lt T gt gt Needable
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><design><design-patterns><object-oriented>
 
 Grams assigned as followed:
@@ -2219,9 +2219,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><architecture><mvc><data-structures><mvp>
 
 Grams assigned as followed:
-C++: 1 Java: 1
+C++: 1 Java: 2
 Code: name value Map lt String String gt update String s1 update Map lt String String gt Map lt K V gt Map lt K V gt Integer i int i int i 0 int Integer Map lt K V gt Map lt K V gt String s int i Object o
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><encapsulation><parameters>
 
 Grams assigned as followed:
@@ -2369,9 +2369,9 @@ Snippet determined to be inconclusive
 Tags include <java><scripting><applications>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: lt missing gt boolean locked null false null 0 1
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><python><type-casting><ecmascript><boxing>
 
 Grams assigned as followed:
@@ -2705,9 +2705,9 @@ Snippet determined to be inconclusive
 Tags include <java><algorithms><big-o>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: ArrayList lt LinkedHashSet lt String gt gt LinkedHashSet merge foo bar foo bar setOfStrings combine the set which contains foo with the set that contains bar arrayList arrayList lt LinkedHashSet lt String gt gt ArrayList operations operations get 1 operations get 2 for Iterator lt LinkedHashSet lt String gt gt iterator setOfStrings iterator iterator hasNext if
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><complexity><hashing>
 
 Grams assigned as followed:
@@ -2855,9 +2855,9 @@ Snippet determined to be inconclusive
 Tags include <java><programming-practices><android-development>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: this getClass getClassLoader getResource getPath
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java>
 
 Grams assigned as followed:
@@ -2891,13 +2891,13 @@ Snippet determined to be inconclusive
 Tags include <object-oriented><javascript><readability><functions>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: Object String ScaledJpeg lt image gt Either String ScaledJpeg Cell toString StringBuilder toString java lang String CellBuilder addText addImage
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><scala><type-systems>
 
 Grams assigned as followed:
-C++: 0 Java: 1
+C++: 0 Java: 2
 Code: java lang Object java wait public final native void wait long timeout public final void wait wait 0 public final void wait long timeout int nanos
 Snippet determined to be Java
 Tags include <java><api-design><implementations><standard-library>
@@ -3083,9 +3083,9 @@ Snippet determined to be C++
 Tags include <java><api-design>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: getThis return this return new nextStep getThis return new nextStep
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><dsl><extensibility><method-chaining>
 
 Grams assigned as followed:
@@ -3275,9 +3275,9 @@ Snippet determined to be inconclusive
 Tags include <java><design><object-oriented-design><generics>
 
 Grams assigned as followed:
-C++: 2 Java: 0
+C++: 1 Java: 3
 Code: Map Client Service do a copy of the parameters to avoid hurting the
-Snippet determined to be C++
+Snippet determined to be Java
 Tags include <java><scope><parameters>
 
 Grams assigned as followed:
@@ -3449,7 +3449,7 @@ Snippet determined to be inconclusive
 Tags include <javascript><inheritance><node.js><event-programming><composition>
 
 Grams assigned as followed:
-C++: 0 Java: 2
+C++: 0 Java: 4
 Code: Thread start class Thread Runnable listFiles filter listFiles filter boolean accept File dir String name listFiles filter java accept listFiles
 Snippet determined to be Java
 Tags include <java><object-oriented-design><encapsulation>
@@ -3479,9 +3479,9 @@ Snippet determined to be inconclusive
 Tags include <java><io><buffers>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: InputStream in socket getInputStream getInputStream InputStream getInputStream
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><io><buffers>
 
 Grams assigned as followed:
@@ -3623,9 +3623,9 @@ Snippet determined to be inconclusive
 Tags include <java><coding-style><performance><api-design>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: NumberFormatException Double NaN Is ABC not a number true
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><parsing>
 
 Grams assigned as followed:
@@ -3683,7 +3683,7 @@ Snippet determined to be inconclusive
 Tags include <design><javascript><node.js><class><object>
 
 Grams assigned as followed:
-C++: 0 Java: 3
+C++: 0 Java: 4
 Code: Preferences KeyNotFoundException getValueByKey null null null getValueByKey Tuple lt Boolean String gt true null false null out Tuple lt Boolean String gt KeyNotFoundException Optional lt String gt Tuple lt Boolean String gt Optional lt String gt absent null Optional boolean containsKey String key getValueByKey getByKey
 Snippet determined to be Java
 Tags include <java><programming-practices><coding-style><exceptions><anti-patterns>
@@ -3773,9 +3773,9 @@ Snippet determined to be inconclusive
 Tags include <java>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: Validator java if obj null
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><validation><java-ee>
 
 Grams assigned as followed:
@@ -3875,9 +3875,9 @@ Snippet determined to be inconclusive
 Tags include <java><inheritance>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: f a b f then function return b then function x a x f a b yield f tmp yield b yield a tmp await await
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <javascript><language-design><asynchronous-programming>
 
 Grams assigned as followed:
@@ -3971,7 +3971,7 @@ Snippet determined to be inconclusive
 Tags include <java><inheritance><type-casting>
 
 Grams assigned as followed:
-C++: 0 Java: 1
+C++: 0 Java: 4
 Code: System err println System out System err
 Snippet determined to be Java
 Tags include <java><programming-practices><debugging>
@@ -4175,9 +4175,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><data-structures><python-3.x><dictionary>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: Math round Math floor toUpperCase
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java>
 
 Grams assigned as followed:
@@ -4319,9 +4319,9 @@ Snippet determined to be inconclusive
 Tags include <java><design-patterns><interfaces><inheritance>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: doComplexTransaction Around execution FQN doComplexTransaction doA doB doC Around Spring AOP transactionId proceedingJoinPoint proceed transactionId In any further advice I could extract the via and inject it in the
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><aspect-oriented>
 
 Grams assigned as followed:
@@ -4343,9 +4343,9 @@ Snippet determined to be inconclusive
 Tags include <design><design-patterns><object-oriented><javascript><globals>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: Guice injector Guice createInjector modules injector injector Provider Provider lt X gt Provider
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><dependency-injection><google-guice>
 
 Grams assigned as followed:
@@ -4391,9 +4391,9 @@ Snippet determined to be inconclusive
 Tags include <java><design><object-oriented><interfaces><abstract-class>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: new instanceof toArray java util AbstractCollection toString
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><design><design-patterns><object-oriented><interfaces>
 
 Grams assigned as followed:
@@ -4481,9 +4481,9 @@ Snippet determined to be inconclusive
 Tags include <java><iterator>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: java util logging logger log
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><libraries><logging><fortran><polyglot>
 
 Grams assigned as followed:
@@ -4541,9 +4541,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><strings><regular-expressions><string-matching>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: String String for metadata getColumnCount int columnCount metadata getColumnCount n metadata getColumnCount
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java>
 
 Grams assigned as followed:
@@ -4553,9 +4553,9 @@ Snippet determined to be inconclusive
 Tags include <java><rest><android>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: foo String bar a z0 9 bar
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><parameters>
 
 Grams assigned as followed:
@@ -4661,13 +4661,13 @@ Snippet determined to be Java
 Tags include <java><android><json>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: NamedObject java lang CharSequence java lang CharSequence getName java lang String NamedObject java lang CharSequence NamedObject
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><class-design><class><strings><conventions>
 
 Grams assigned as followed:
-C++: 0 Java: 1
+C++: 0 Java: 2
 Code: java util Properties getProperty getProperty if prop null throw new SomeException if
 Snippet determined to be Java
 Tags include <java><properties>
@@ -4751,9 +4751,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><dependency-injection><inversion-of-control>
 
 Grams assigned as followed:
-C++: 1 Java: 0
+C++: 1 Java: 1
 Code: checkArray describe describe it should be an array SHOULD myApp
-Snippet determined to be C++
+Snippet determined to be inconclusive
 Tags include <javascript><unit-testing><testing><tdd><bdd>
 
 Grams assigned as followed:
@@ -4889,15 +4889,15 @@ Snippet determined to be inconclusive
 Tags include <java><enum>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: double a b a length a add b a scale b a dot b a cross b a b NaN 0 0 length scale a hashCode a equals b
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><math><behavior>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: NaN NaN Math min 1 2 Math min Math min 5
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <javascript><math>
 
 Grams assigned as followed:
@@ -5231,13 +5231,13 @@ Snippet determined to be inconclusive
 Tags include <java><design><object-oriented><uml>
 
 Grams assigned as followed:
-C++: 1 Java: 1
+C++: 1 Java: 2
 Code: 0 3 0 1 0 2
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><floating-point>
 
 Grams assigned as followed:
-C++: 0 Java: 2
+C++: 0 Java: 3
 Code: import java util import java util Scanner
 Snippet determined to be Java
 Tags include <java>
@@ -5291,7 +5291,7 @@ Snippet determined to be inconclusive
 Tags include <javascript><debugging><event-programming>
 
 Grams assigned as followed:
-C++: 0 Java: 1
+C++: 0 Java: 2
 Code: java util concurrent ThreadPoolExecutor
 Snippet determined to be Java
 Tags include <java><multithreading><queue>
@@ -5381,9 +5381,9 @@ Snippet determined to be inconclusive
 Tags include <java>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: AbstractCollection add E e Something add String n AbstractCollection addAll Collection lt extends E gt c
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><methods>
 
 Grams assigned as followed:
@@ -5429,9 +5429,9 @@ Snippet determined to be inconclusive
 Tags include <java><object-oriented>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: public lt U extends Number gt void inspect U u public void inspect Number n
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><generics>
 
 Grams assigned as followed:
@@ -5495,9 +5495,9 @@ Snippet determined to be inconclusive
 Tags include <java><exceptions>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: static final List
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java>
 
 Grams assigned as followed:
@@ -5639,9 +5639,9 @@ Snippet determined to be inconclusive
 Tags include <java><design><service><controller>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: Controller Service Repository EventService storeStartEvent EntityForm form storeFailEvent EntityForm form List errors storeSavedEvent Entity entity EntityForm service save EntityForm form service save EntityForm form InetAddress ipAddress service save EntityFormWithMetadata form Using a thread local variable Moving the saved event storage into the Controller save Refactoring the event creation somehow and using somehow using Java Annotations for methods that need this kind of logging Entity EntityForm EntityForm with List
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><architecture><logging>
 
 Grams assigned as followed:
@@ -5687,9 +5687,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><exceptions><conditions>
 
 Grams assigned as followed:
-C++: 2 Java: 0
+C++: 1 Java: 5
 Code: pipeline with distinct stages specific Publisher P edition is gt 2 0 Price is lt 5k For example if tomorrow I need to work on a similar logic for US I should be able to use Step 1 but for a different publisher Step Interface instanceof process Note that this change should be reflected in sub sequent Stages FilterByPublisher abstract FilterByPublisher
-Snippet determined to be C++
+Snippet determined to be Java
 Tags include <java><design-patterns><object-oriented-design>
 
 Grams assigned as followed:
@@ -5765,9 +5765,9 @@ Snippet determined to be inconclusive
 Tags include <java><design-patterns><builder-pattern>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: java lang Iterable lt T gt java util Enumeration lt E gt
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><immutability><collections>
 
 Grams assigned as followed:
@@ -5981,9 +5981,9 @@ Snippet determined to be inconclusive
 Tags include <java><c++><garbage-collection>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: appendFooter s public void appendFooter StringBuffer report report appendFooter
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><clean-code>
 
 Grams assigned as followed:
@@ -5999,7 +5999,7 @@ Snippet determined to be inconclusive
 Tags include <java><design-patterns><object-oriented-design><uml>
 
 Grams assigned as followed:
-C++: 0 Java: 1
+C++: 0 Java: 2
 Code: private static list lt items String name int count gt list lt items gt
 Snippet determined to be Java
 Tags include <java><multithreading><static>
@@ -6011,7 +6011,7 @@ Snippet determined to be inconclusive
 Tags include <java><design><dao>
 
 Grams assigned as followed:
-C++: 0 Java: 1
+C++: 0 Java: 3
 Code: public int myMethod throws Exception int throws exception throw new UnsupportedOperationException throws Exception
 Snippet determined to be Java
 Tags include <java>
@@ -6035,9 +6035,9 @@ Snippet determined to be inconclusive
 Tags include <java><rest><web-services><http>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 1
 Code: SuppressWarnings unchecked SuppressWarnings null SuppressWarnings unchecked SuppressWarnings null
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><exceptions><runtime><type-casting><warnings>
 
 Grams assigned as followed:
@@ -6065,9 +6065,9 @@ Snippet determined to be C++
 Tags include <java><array><client-server><sockets>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: logger error some message e message logger error some message e logger error some message e toString logger error some message logger error some message e stack stack stack stack message stack stack I can search the error message in code and find it e message e stack
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java><javascript><node.js>
 
 Grams assigned as followed:
@@ -6077,9 +6077,9 @@ Snippet determined to be inconclusive
 Tags include <java><web-applications><rest><api><spring>
 
 Grams assigned as followed:
-C++: 2 Java: 0
+C++: 2 Java: 2
 Code: eval new Function eval eval something something return true eval 2 2 3 return 8 amp amp eval 1 1 amp amp cat dog return false eval 1 2 dog cat return cat if else eval if 1 2 dog else if 1 3 dog else nothing return nothing Math eval Math ceil 12 313 return 13 new Function var item this item number 10 item item is variable defined outside of eval and I want to dynamically modify it within eval eval invert 123 return 321 invert is a function defined somewhere else
-Snippet determined to be C++
+Snippet determined to be inconclusive
 Tags include <javascript><parsing><computation-expressions>
 
 Grams assigned as followed:
@@ -6275,9 +6275,9 @@ Snippet determined to be inconclusive
 Tags include <javascript><asynchronous-programming><async><typescript><promises>
 
 Grams assigned as followed:
-C++: 0 Java: 0
+C++: 0 Java: 2
 Code: System getProperty user dir System getProperty user home
-Snippet determined to be inconclusive
+Snippet determined to be Java
 Tags include <java>
 
 Grams assigned as followed:
