@@ -85,9 +85,12 @@ if __name__ == '__main__':
 
 	kneserJavaHash = convertProbListToHash(kneserJava)
 	kneserCPPHash = convertProbListToHash(kneserCPP)
-	
+	 
 	cpp = 0
 	java = 0
+	totalCppWithTag = 0
+	totalJavaWithTag = 0
+	totalEval = 0
 
 	outFile = open('Results.txt', 'a')
 
@@ -106,8 +109,10 @@ if __name__ == '__main__':
 				continue
 			
 			tags.lower()
-			if not ('java' or 'c++') in tags:
+			if not ('java' or 'c++' or 'android' or 'spring' or 'swing') in tags:
 				continue
+
+			totalEval += 1# total posts not skipped
 
 			code = parseBodyForTagCode(body)
 			codeString = ''
@@ -133,7 +138,8 @@ if __name__ == '__main__':
 
 			for gram in codeGram:
 				cppValue = kneserCPPHash.get(str(gram))
-				javaValue = kneserJavaHash.get(str(gram)) 
+				javaValue = kneserJavaHash.get(str(gram))
+
 
 				if cppValue != None and javaValue != None:
 					if cppValue > javaValue:
@@ -147,12 +153,23 @@ if __name__ == '__main__':
 
 			fileString = ''
 			fileString = fileString+'Grams assigned as followed:\n'
-			fileString = fileString+'C++: {} Java: {}\n'.format(cpp,java)
+			fileString = fileString+'C++: {} Java: {}\nCode: {}\n'.format(cpp,java,codeString)
 			if cpp > java:
-				fileString = fileString+'Code Snippet determined to be C++\nTags include {}\n'.format(tags)
+				fileString = fileString+'Snippet determined to be C++\nTags include {}\n\n'.format(tags)
+				if 'c++' in tags:
+					totalCppWithTag += 1
 			elif java > cpp:
-				fileString = fileString+'Code Snippet determined to be Java\nTags include {}\n'.format(tags)
+				fileString = fileString+'Snippet determined to be Java\nTags include {}\n\n'.format(tags)
+				if ('java' or 'android' or 'spring' or 'swing') in tags:
+					totalJavaWithTag += 1
 			elif java == cpp:
-				fileString = fileString+'Code Snippet determined to be inconclusive\nTags include {}\n'.format(tags)
+				fileString = fileString+'Snippet determined to be inconclusive\nTags include {}\n\n'.format(tags)
+			
+			java = 0
+			cpp = 0
 
 			outFile.write(fileString)
+
+	print('Total Java snippets with tags (java, android, spring, swing): {}'.format(totalJavaWithTag))
+	print('Total C++ snippets with tags (c++): {}'.format(totalCppWithTag))
+	print('Total snippets evaluated: {}'.format(totalEval))
