@@ -99,88 +99,90 @@ if __name__ == '__main__':
 	totalJavaWithTag = 0
 	totalEval = 0
 
-	outFile = open('Results.txt', 'a')
+	outFile = open('Results2.txt', 'a')
+	fileString = ''
 
 	# tree = ET.parse(xmldoc)
 	# root = tree.getroot()
-	for event, element in etree.iterparse(posts_fn, tag="row"):
-		for row in root:
-			body = row.get('Body')
-			# Only allow posts with a code tag to be added
-			if '<code>' in body:
-				postId = row.get('Id')
-				# Tags for comment post
-				tags = row.get('Tags')
+	for event, element in etree.iterparse(xmldoc, tag="row"):
+		body = element.get('Body')
+		# Only allow posts with a code tag to be added
+		if '<code>' in body:
+			postId = element.get('Id')
+			# Tags for comment post
+			tags = element.get('Tags')
 
-				if tags == None:
-					continue
-				
-				tags.lower()
-				if not ('java' or 'c++' or 'android' or 'spring' or 'swing') in tags:
-					continue
+			if tags == None:
+				continue
+			
+			tags.lower()
+			if not ('<java>' or '<c++>' or '<c++-faq>' or '<android>' or '<spring>' or '<swing>') in tags:
+				continue
 
-				totalEval += 1# total posts not skipped
+			code = parseBodyForTagCode(body)
+			codeString = ''
+			for item in code:
+				# print(item)
+				codeString = codeString+re.sub('<code>|</code>',' ',item)
+			
+			codeString = re.sub('\n|\r|/\s\s+/g}',' ',codeString)
+			codeString = re.sub('\.', ' ', codeString)
+			codeString = re.sub('\t', '',codeString)
+			codeString = re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,codeString)
+			codeString = re.sub(re.compile("//.*?\n" ) ,"" ,codeString)
+			codeString = re.sub( '[^0-9a-zA-Z]+', ' ', codeString )
+			codeString = re.sub( '\s+', ' ', codeString).strip()
 
-				code = parseBodyForTagCode(body)
-				codeString = ''
-				for item in code:
-					codeString = codeString+re.sub('<code>|</code>',' ',item)
-				
-				codeString = re.sub('\n|\r|/\s\s+/g}',' ',codeString)
-				codeString = re.sub('\.', ' ', codeString)
-				codeString = re.sub('\t', '',codeString)
-				codeString = re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,codeString)
-				codeString = re.sub(re.compile("//.*?\n" ) ,"" ,codeString)
-				# codeString = re.sub( '[^0-9a-zA-Z]+', ' ', codeString )
-				codeString = re.sub( '\s+', ' ', codeString).strip()
+			codeLength = len(codeString.split())
+			# print(codeLength)
+			if(codeLength < 3):
+				continue
 
-				codeLength = len(codeString.split())
+			totalEval += 1# total posts not skipped
+			# print(codeString)
+			codeList = ngrams(codeString.split(' '),3)
+			codeGram = nltk.FreqDist(codeList)
+			
 
-				if(codeLength < 3):
-					continue
-
-				codeList = ngrams(codeString.split(' '),3)
-				codeGram = nltk.FreqDist(codeList)
-				
-
-				for gram in codeGram:
-					cppValue = kneserCPPHash.get(str(gram))
-					javaValue = kneserJavaHash.get(str(gram))
+			for gram in codeGram:
+				cppValue = kneserCPPHash.get(str(gram))
+				javaValue = kneserJavaHash.get(str(gram))
 
 
-					if cppValue != None and javaValue != None:
-						if cppValue > javaValue:
-							cpp += 1
-						else:
-							java += 1
-					elif cppValue == None and javaValue != None:
-						java += 1
-					elif cppValue != None and javaValue == None:
+				if cppValue != None and javaValue != None:
+					if cppValue > javaValue:
 						cpp += 1
+					else:
+						java += 1
+				elif cppValue == None and javaValue != None:
+					java += 1
+				elif cppValue != None and javaValue == None:
+					cpp += 1
 
-				fileString = ''
-				fileString = fileString+'Grams assigned as followed:\n'
-				fileString = fileString+'PostId: {}\nC++: {} Java: {}\nCode: {} \n'.format(postId,cpp,java,codeString)
-				if cpp > java:
-					fileString = fileString+'Snippet determined to be C++\nTags include {}\n\n'.format(tags)
-					if 'c++' in tags:
-						totalCppWithTag += 1
-				elif java > cpp:
-					fileString = fileString+'Snippet determined to be Java\nTags include {}\n\n'.format(tags)
-					if ('java' or 'android' or 'spring' or 'swing') in tags:
-						totalJavaWithTag += 1
-				elif java == cpp:
-					fileString = fileString+'Snippet determined to be inconclusive\nTags include {}\n\n'.format(tags)
-				
-				java = 0
-				cpp = 0
+			
+			fileString = fileString+'Grams assigned as followed:\n'
+			fileString = fileString+'PostId: {}\nC++: {} Java: {}\nCode: {} \n'.format(postId,cpp,java,codeString)
+			if cpp > java:
+				fileString = fileString+'Snippet determined to be C++\nTags include {}\n\n'.format(tags)
+				if ('<c++>' or '<c++-faq>') in tags:
+					totalCppWithTag += 1
+			elif java > cpp:
+				fileString = fileString+'Snippet determined to be Java\nTags include {}\n\n'.format(tags)
+				if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+					totalJavaWithTag += 1
+			elif java == cpp:
+				fileString = fileString+'Snippet determined to be inconclusive\nTags include {}\n\n'.format(tags)
+			
+			java = 0
+			cpp = 0
 
-				outFile.write(fileString)
-		element.clear()
+			
+			element.clear()
 		for ancestor in element.xpath('ancestor-or-self::*'):
 			while ancestor.getprevious() is not None:
 				del ancestor.getparent()[0]
+	outFile.write(fileString)
 
-	print('Total Java snippets with tags (java, android, spring, swing): {}'.format(totalJavaWithTag))
-	print('Total C++ snippets with tags (c++): {}'.format(totalCppWithTag))
+	print('Total Java snippets determined and also have tags (java, android, spring, swing): {}'.format(totalJavaWithTag))
+	print('Total C++ snippets determined and also have tags (c++): {}'.format(totalCppWithTag))
 	print('Total snippets evaluated: {}'.format(totalEval))
