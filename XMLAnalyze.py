@@ -124,14 +124,18 @@ if __name__ == '__main__':
 				continue
 			
 			tags.lower()
-			if not ('<java>' or '<c++>' or '<c++-faq>' or '<android>' or '<spring>' or '<swing>') in tags:
+			if not ('<java>' or 'c++' or '<c>' or '<c++-faq>' or '<android>' or '<spring>' or '<swing>') in tags:
 				continue
+
+			# Skip if post contains tags from multiple languauges
+			# if (('<c++>' or '<c++-faq>' or '<c>' in tags) and ('<java>' or '<android>' or '<spring>' or '<swing>' in tags)) :
+			# 	continue
 
 			code = parseBodyForTagCode(body)
 			codeString = ''
 			for item in code:
 				snipetLength = len(item.split())
-				if snipetLength > 3:
+				if snipetLength > 5:
 					codeString = codeString+re.sub('<code>|</code>',' ',item)
 			
 			codeString = re.sub('\n|\r|/\s\s+/g}',' ',codeString)
@@ -146,13 +150,13 @@ if __name__ == '__main__':
 
 			codeLength = len(codeString.split())
 			# print(codeLength)
-			if(codeLength < 3):
+			if(codeLength < 5):
 				continue
 
 			totalEval += 1# total posts not skipped
 
 			# In some cases a post can include tags associated with more than one languauge
-			if ('<c++>' or '<c++-faq>') in tags:
+			if ('c++' or '<c++-faq>' or '<c>') in tags:
 				totalCppTags += 1
 			if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
 				totalJavaTags += 1
@@ -182,7 +186,7 @@ if __name__ == '__main__':
 			resultsFileString = resultsFileString+'PostId: {}\nC++: {} Java: {}\nCode: {} \n'.format(postId,cpp,java,codeString)
 			if cpp > java:
 				resultsFileString = resultsFileString+'Snippet determined to be C++\nTags include {}\n\n'.format(tags)
-				if ('<c++>' or '<c++-faq>') in tags:
+				if ('c++' or '<c++-faq>' or '<c>') in tags:
 					totalCppWithTag += 1
 			elif java > cpp:
 				
@@ -211,6 +215,6 @@ if __name__ == '__main__':
 
 	print('Total Java snippets determined and also have tags (java, android, spring, swing): {}'.format(totalJavaWithTag))
 	print('Total Java snippets: {}'.format(totalJavaTags))
-	print('Total C++ snippets determined and also have tags (c++, c++-faq): {}'.format(totalCppWithTag))
+	print('Total C++ snippets determined and also have tags (c++, c++-faq, c): {}'.format(totalCppWithTag))
 	print('Total C++ snippets: {}'.format(totalCppTags))
 	print('Total snippets evaluated: {}'.format(totalEval))
