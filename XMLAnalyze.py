@@ -108,7 +108,12 @@ if __name__ == '__main__':
 
 	resultsFile = open('Results.txt', 'a')
 	codeFile = open('Code.txt', 'a')
-	resultsFileString = codeFileString = ''
+	analyticsFile = open('Analytics.txt', 'a')
+
+	resultsFileString = codeFileString = analyticsString = ''
+
+	presencePosCpp = presenceNegCpp = absencePosCpp = absenceNegCpp = 0
+	presencePosJava = presenceNegJava = absencePosJava = absenceNegJava = 0
 
 	# tree = ET.parse(xmldoc)
 	# root = tree.getroot()
@@ -195,7 +200,33 @@ if __name__ == '__main__':
 					totalJavaWithTag += 1
 			elif java == cpp:
 				resultsFileString = resultsFileString+'Snippet determined to be inconclusive\nTags include {}\n\n'.format(tags)
+
+			# analyze results
+
+			if ('c++' or '<c++-faq>' or '<c>') in tags:
+				# presence is true
+				if cpp > java:
+					# positive is true
+					presencePosCpp += 1
+				else:
+					presenceNegCpp += 1
+			elif cpp > java:
+				absencePosCpp += 1
+			else:
+				absenceNegCpp += 1
 			
+			if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+				# presence is true
+				if java > cpp:
+					presencePosJava += 1
+				else:
+					presenceNegJava += 1
+			elif java > cpp:
+				absencePosJava += 1
+			else: 
+				absenceNegJava += 1
+
+
 			java = 0
 			cpp = 0
 
@@ -206,12 +237,20 @@ if __name__ == '__main__':
 				del ancestor.getparent()[0]
 
 
+
+		# (presencePosJava/(presencePosJava+presenceNegJava)), (absenceNegJava/(absencePosJava+absenceNegJava))
+
+		analyticsString = 'Java\nPresence Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nAbsence Negative: {}\n'.format(presencePosJava,presenceNegJava,absencePosJava,absenceNegJava)
+		analyticsString += '\n\nC++\nPresence Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nAbsence Negative: {}'.format(presencePosCpp,presenceNegCpp,absencePosCpp,absenceNegCpp)
+
+
 #############################################################################################
 # Section Output
 #############################################################################################
 
 	resultsFile.write(resultsFileString)
 	codeFile.write(codeFileString)
+	analyticsFile.write(analyticsString)
 
 	print('Total Java snippets determined and also have tags (java, android, spring, swing): {}'.format(totalJavaWithTag))
 	print('Total Java snippets: {}'.format(totalJavaTags))
