@@ -23,9 +23,7 @@ def features(sentence):
 
 if __name__ == '__main__':
 	xmldoc = sys.argv[1]
-	# comments = sys.argv[2]
 	knownJava = sys.argv[2]
-	# testFile = sys.argv[4]
 	knownCpp = sys.argv[3]
 ###################################################################
 # Section 1: Gather known data to create frequencies for known information
@@ -53,44 +51,9 @@ if __name__ == '__main__':
 
 	# cppMaxGram = max(knownCPPHashFreq, key=knownCPPHashFreq.get)
 	# print(cppMaxGram, knownCPPHashFreq[cppMaxGram])
-
-###################################################################
-# Section 2: Compare with known ngrams of code (Test Data)
-###################################################################
-	# myHash = createHash(xmldoc,comments)# createListOfCode(xmldoc)
-	# print(len(myHash))
-
-	# test = open(testFile)
-	# testString = ""
-	# for line in test:
-	# 	testString += line
-
-	# testString = os.linesep.join([s for s in testString.splitlines() if s])
-	# testString = re.sub('\\n|\\r|/\s\s+/g}',' ',testString)
-	# testString = re.sub('\.', ' ', testString)
-	# testString = re.sub('\\t', '',testString)
-	# testString = re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,testString)
-	# testString = re.sub(re.compile("//.*?\n" ) ,"" ,testString)
-	# testString = re.sub( '[^0-9a-zA-Z]+', ' ', testString )
-	# testString = re.sub( '\s+', ' ', testString ).strip()
-	
-	# testList = ngrams(testString.split(' '),3)
-	# testGram = nltk.FreqDist(testList)
-
-	# print(testString)
-
-	 # for event, element in etree.iterparse(posts_fn, tag="row"):
-  #       ...
-
-  #       element.clear()
-  #       # Also eliminate now-empty references from the root node to elem
-  #       for ancestor in element.xpath('ancestor-or-self::*'):
-  #           while ancestor.getprevious() is not None:
-  #               del ancestor.getparent()[0]
-
 	
 #############################################################################################
-# Section 3: to calculate trigram Probability
+# Section 2: to calculate trigram Probability
 #############################################################################################
 	kneserJava = nltk.KneserNeyProbDist(knownJavaHashFreq)
 	kneserCPP = nltk.KneserNeyProbDist(knownCPPHashFreq)
@@ -238,10 +201,33 @@ if __name__ == '__main__':
 
 
 
-		# (presencePosJava/(presencePosJava+presenceNegJava)), (absenceNegJava/(absencePosJava+absenceNegJava))
+		# javaSensitivity = presencePosJava / (presencePosJava+presenceNegJava)
+		# javaSpecificity = absenceNegJava / (absenceNegJava+absencePosJava)
+		# javaRateFalsePos = absencePosJava / (absencePosJava+absenceNegJava)
+		# javaRateFalseNeg = presenceNegJava / (presenceNegJava+presencePosJava)
+		# javaPosPredict = presencePosJava / (presencePosJava+ absencePosJava)
+		# javaNegPredict = presenceNegJava / (presenceNegJava+ absenceNegJava)
+		# javaRelativeRisk = (presencePosJava/ presencePosJava + presenceNegJava) / (absencePosJava / absencePosJava + absenceNegJava)
+		
+		# cppSensitivity = presencePosCpp / (presencePosCpp+presenceNegCpp)
+		# cppSpecificity = absenceNegCpp / (absenceNegCpp+absencePosCpp)
+		# cppRateFalsePos = absencePosCpp / (absencePosCpp+absenceNegCpp)
+		# cppRateFalseNeg = presenceNegCpp / (presenceNegCpp+presencePosCpp)
+		# cppPosPredict = presencePos / (presencePos+ absencePos)
+		# cppNegPredict = presenceNeg / (presenceNeg+absenceNeg)
+		# cppRelativeRisk = (presencePosCpp/ presencePosCpp + presenceNegCpp) / (absencePosCpp / absencePosCpp + absenceNegCpp)
 
-		analyticsString = 'Java\nPresence Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nAbsence Negative: {}\n'.format(presencePosJava,presenceNegJava,absencePosJava,absenceNegJava)
-		analyticsString += '\n\nC++\nPresence Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nAbsence Negative: {}'.format(presencePosCpp,presenceNegCpp,absencePosCpp,absenceNegCpp)
+		analyticsString = 'Java\n------\nPresence Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nAbsence Negative: {}\n'.format(presencePosJava,presenceNegJava,absencePosJava,absenceNegJava)
+		# analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(javaSensitivity, javaSpecificity)
+		# analyticsString += '\nRate False Positives: {}\nRate False Negatives: {}'.format(javaRateFalsePos, javaRateFalseNeg)
+		# analyticsString += '\nEstimate Positive Predictive Value: {}\nEstimate Negative Predictive Value: {}'.format(javaPosPredict, javaNegPredict)
+		# analyticsString += '\nRelative Risk: {}'.format(javaRelativeRisk)
+
+		analyticsString += '\n\nC++\n------\nPresence Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nAbsence Negative: {}'.format(presencePosCpp,presenceNegCpp,absencePosCpp,absenceNegCpp)
+		# analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(cppSensitivity, cppSpecificity)
+		# analyticsString += '\nRate False Positives: {}\nRate False Negatives: {}'.format(cppRateFalsePos, cppRateFalseNeg)
+		# analyticsString += '\nEstimate Positive Predictive Value: {}\nEstimate Negative Predictive Value: {}'.format(cppPosPredict, cppNegPredict)
+		# analyticsString += '\nRelative Risk: {}'.format(cppRelativeRisk)
 
 
 #############################################################################################
