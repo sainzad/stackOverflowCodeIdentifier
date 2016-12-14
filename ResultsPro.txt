@@ -1,0 +1,154 @@
+Grams assigned as followed:
+PostId: 112130
+C++: 0 Java: 1
+Code: MyClass someInstance new MyClass param0 null null 0 null param5 
+Snippet determined to be Java
+Tags include <java><object-oriented><functions>
+
+Grams assigned as followed:
+PostId: 168408
+C++: 0 Java: 1
+Code: Type mismatch cannot convert from int to byte 
+Snippet determined to be Java
+Tags include <java><data-types><type-casting><byte>
+
+Grams assigned as followed:
+PostId: 170996
+C++: 0 Java: 1
+Code: define REP i n for typeof n i 0 i lt n i define REP i n for typeof n i 0 i lt n i 
+Snippet determined to be Java
+Tags include <java><c++>
+
+Grams assigned as followed:
+PostId: 176078
+C++: 0 Java: 2
+Code: private static final boolean DEBUG false 
+Snippet determined to be Java
+Tags include <java><testing><logging><debugging>
+
+Grams assigned as followed:
+PostId: 177398
+C++: 0 Java: 2
+Code: If thread t was removed from m s wait set in step 2 due to an interrupt Thread t does not execute any further instructions until it has been removed from m s wait set 
+Snippet determined to be Java
+Tags include <java><multithreading><concurrency>
+
+Grams assigned as followed:
+PostId: 201048
+C++: 0 Java: 1
+Code: modify the software under the terms of the GNU General Public License version 2 
+Snippet determined to be Java
+Tags include <java><licensing><open-source><gpl><legal>
+
+Grams assigned as followed:
+PostId: 209723
+C++: 0 Java: 6
+Code: public void authenticate String username String password private void invokeServer String username String password 
+Snippet determined to be Java
+Tags include <java><exceptions>
+
+Grams assigned as followed:
+PostId: 229926
+C++: 0 Java: 1
+Code: String s int i Object o 
+Snippet determined to be Java
+Tags include <java><encapsulation><parameters>
+
+Grams assigned as followed:
+PostId: 240299
+C++: 0 Java: 2
+Code: public static final String XMLFileExtension xml 
+Snippet determined to be Java
+Tags include <java><c#><development-environment>
+
+Grams assigned as followed:
+PostId: 245495
+C++: 0 Java: 1
+Code: combine the set which contains foo with the set that contains bar for Iterator lt LinkedHashSet lt String gt gt iterator setOfStrings iterator iterator hasNext 
+Snippet determined to be Java
+Tags include <java><complexity><hashing>
+
+Grams assigned as followed:
+PostId: 253037
+C++: 0 Java: 1
+Code: public final native void wait long timeout public final void wait long timeout int nanos 
+Snippet determined to be Java
+Tags include <java><api-design><implementations><standard-library>
+
+Grams assigned as followed:
+PostId: 256464
+C++: 1 Java: 0
+Code: f x y sin x 2 3 y 3 Function f new Sum new Exponent new Sin new Variable x 2 new Product new Constant 3 new Exponent new Variable y 3 Function f new Sum new Exponent new Sin new Variable x 2 new Product new Constant 3 new Exponent new Variable y 3 Function f Sum create Exponent create Sin create Variable create x Constant create 2 Function f sum power sin getVariable x getConstant 2 product getConstant 3 power getVariable y constant 3 Function f FunctionGenerator parse sin x 2 3 y 3 
+Snippet determined to be C++
+Tags include <java><api-design>
+
+Grams assigned as followed:
+PostId: 261459
+C++: 1 Java: 3
+Code: do a copy of the parameters to avoid hurting the 
+Snippet determined to be Java
+Tags include <java><scope><parameters>
+
+Grams assigned as followed:
+PostId: 271300
+C++: 0 Java: 1
+Code: Is ABC not a number true 
+Snippet determined to be Java
+Tags include <java><parsing>
+
+Grams assigned as followed:
+PostId: 284344
+C++: 2 Java: 1
+Code: throw new IllegalStateException Light should not be color 
+Snippet determined to be C++
+Tags include <java><conventions><enum>
+
+Grams assigned as followed:
+PostId: 296707
+C++: 0 Java: 1
+Code: if prop null throw new SomeException 
+Snippet determined to be Java
+Tags include <java><properties>
+
+Grams assigned as followed:
+PostId: 316775
+C++: 0 Java: 1
+Code: Moving the saved event storage into the Controller Refactoring the event creation somehow and using somehow using Java Annotations for methods that need this kind of logging 
+Snippet determined to be Java
+Tags include <java><architecture><logging>
+
+Grams assigned as followed:
+PostId: 317324
+C++: 1 Java: 5
+Code: For example if tomorrow I need to work on a similar logic for US I should be able to use Step 1 but for a different publisher Note that this change should be reflected in sub sequent Stages 
+Snippet determined to be Java
+Tags include <java><design-patterns><object-oriented-design>
+
+Grams assigned as followed:
+PostId: 321993
+C++: 0 Java: 1
+Code: public static void add List lt Integer gt lst1 List lt Integer gt lst2 
+Snippet determined to be Java
+Tags include <java>
+
+Grams assigned as followed:
+PostId: 322567
+C++: 0 Java: 2
+Code: private static list lt items String name int count gt 
+Snippet determined to be Java
+Tags include <java><multithreading><static>
+
+Grams assigned as followed:
+PostId: 323542
+C++: 1 Java: 0
+Code: i need to find the unique id 
+Snippet determined to be C++
+Tags include <java><array><client-server><sockets>
+
+Grams assigned as followed:
+PostId: 323556
+C++: 0 Java: 2
+Code: I can search the error message in code and find it 
+Snippet determined to be Java
+Tags include <java><javascript><node.js>
+
