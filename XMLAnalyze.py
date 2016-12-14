@@ -97,8 +97,8 @@ if __name__ == '__main__':
 				continue
 
 			# Skip if post contains tags from multiple languauges
-			if (('<c++>' or '<c++-faq>' or '<c>' in tags) and ('<java>' or '<android>' or '<spring>' or '<swing>' in tags)) :
-				continue
+			# if (('<c++>' or '<c++-faq>' or '<c>' in tags) and ('<java>' or '<android>' or '<spring>' or '<swing>' in tags)) :
+			# 	continue
 
 			code = parseBodyForTagCode(body)
 			codeString = ''
@@ -150,14 +150,14 @@ if __name__ == '__main__':
 				elif cppValue != None and javaValue == None:
 					cpp += 1
 			
-				# if java == 0 and cpp == 0:
-				# 	continue
-				# elif java == cpp:
-				# 	ran  = randint(0,1)
-				# 	if(ran == 0):
-				# 		java += 1
-				# 	else:
-				# 		cpp += 1
+				if java == 0 and cpp == 0:
+					continue
+				elif java == cpp:
+					ran  = randint(0,1)
+					if(ran == 0):
+						java += 1
+					else:
+						cpp += 1
 			
 			resultsFileString = resultsFileString+'Grams assigned as followed:\n'
 			resultsFileString = resultsFileString+'PostId: {}\nC++: {} Java: {}\nCode: {} \n'.format(postId,cpp,java,codeString)
