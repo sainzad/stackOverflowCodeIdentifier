@@ -11,6 +11,7 @@ import re
 import os
 import nltk
 import operator
+from random import randint
 from nltk.util import ngrams
 from ngramFunctions import *
 from XMLParser import *
@@ -75,8 +76,8 @@ if __name__ == '__main__':
 
 	resultsFileString = codeFileString = analyticsString = ''
 
-	presencePosCpp = presenceNegCpp = absencePosCpp = absenceNegCpp = 0
-	presencePosJava = presenceNegJava = absencePosJava = absenceNegJava = 0
+	presencePosCpp = presenceNegCpp = absencePosCpp = absenceNegCpp =1
+	presencePosJava = presenceNegJava = absencePosJava = absenceNegJava = 1
 
 	# tree = ET.parse(xmldoc)
 	# root = tree.getroot()
@@ -96,8 +97,8 @@ if __name__ == '__main__':
 				continue
 
 			# Skip if post contains tags from multiple languauges
-			# if (('<c++>' or '<c++-faq>' or '<c>' in tags) and ('<java>' or '<android>' or '<spring>' or '<swing>' in tags)) :
-			# 	continue
+			if (('<c++>' or '<c++-faq>' or '<c>' in tags) and ('<java>' or '<android>' or '<spring>' or '<swing>' in tags)) :
+				continue
 
 			code = parseBodyForTagCode(body)
 			codeString = ''
@@ -148,7 +149,15 @@ if __name__ == '__main__':
 					java += 1
 				elif cppValue != None and javaValue == None:
 					cpp += 1
-
+			
+				# if java == 0 and cpp == 0:
+				# 	continue
+				# elif java == cpp:
+				# 	ran  = randint(0,1)
+				# 	if(ran == 0):
+				# 		java += 1
+				# 	else:
+				# 		cpp += 1
 			
 			resultsFileString = resultsFileString+'Grams assigned as followed:\n'
 			resultsFileString = resultsFileString+'PostId: {}\nC++: {} Java: {}\nCode: {} \n'.format(postId,cpp,java,codeString)
@@ -161,21 +170,26 @@ if __name__ == '__main__':
 				resultsFileString = resultsFileString+'Snippet determined to be Java\nTags include {}\n\n'.format(tags)
 				if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
 					totalJavaWithTag += 1
-			elif java == cpp:
-				resultsFileString = resultsFileString+'Snippet determined to be inconclusive\nTags include {}\n\n'.format(tags)
-
+			
 			# analyze results
 
 			if ('c++' or '<c++-faq>' or '<c>') in tags:
 				# presence is true
 				if cpp > java:
 					# positive is true
+					# true positive
 					presencePosCpp += 1
 				else:
+					# false negative
 					presenceNegCpp += 1
 			elif cpp > java:
+				# been determined cpp but no cpp tags
+				# incorectly determined
+				# false positive
 				absencePosCpp += 1
 			else:
+				# determined not to be cpp correctly
+				# true negative
 				absenceNegCpp += 1
 			
 			if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
@@ -194,40 +208,39 @@ if __name__ == '__main__':
 			cpp = 0
 
 			
-			element.clear()
+			element.clear()  
 		for ancestor in element.xpath('ancestor-or-self::*'):
 			while ancestor.getprevious() is not None:
 				del ancestor.getparent()[0]
 
 
+	javaSensitivity = presencePosJava / (presencePosJava+presenceNegJava)
+	javaSpecificity = absenceNegJava / (absenceNegJava+absencePosJava)
+	javaRateFalsePos = absencePosJava / (absencePosJava+absenceNegJava)
+	javaRateFalseNeg = presenceNegJava / (presenceNegJava+presencePosJava)
+	javaPosPredict = presencePosJava / (presencePosJava+ absencePosJava)
+	javaNegPredict = presenceNegJava / (presenceNegJava+ absenceNegJava)
+	javaRelativeRisk = (presencePosJava/ presencePosJava + presenceNegJava) / (absencePosJava / absencePosJava + absenceNegJava)
+	
+	cppSensitivity = presencePosCpp / (presencePosCpp+presenceNegCpp)
+	cppSpecificity = absenceNegCpp / (absenceNegCpp+absencePosCpp)
+	cppRateFalsePos = absencePosCpp / (absencePosCpp+absenceNegCpp)
+	cppRateFalseNeg = presenceNegCpp / (presenceNegCpp+presencePosCpp)
+	cppPosPredict = presencePosCpp / (presencePosCpp+ absencePosCpp)
+	cppNegPredict = presenceNegCpp / (presenceNegCpp+absenceNegCpp)
+	cppRelativeRisk = (presencePosCpp/ presencePosCpp + presenceNegCpp) / (absencePosCpp / absencePosCpp + absenceNegCpp)
 
-		# javaSensitivity = presencePosJava / (presencePosJava+presenceNegJava)
-		# javaSpecificity = absenceNegJava / (absenceNegJava+absencePosJava)
-		# javaRateFalsePos = absencePosJava / (absencePosJava+absenceNegJava)
-		# javaRateFalseNeg = presenceNegJava / (presenceNegJava+presencePosJava)
-		# javaPosPredict = presencePosJava / (presencePosJava+ absencePosJava)
-		# javaNegPredict = presenceNegJava / (presenceNegJava+ absenceNegJava)
-		# javaRelativeRisk = (presencePosJava/ presencePosJava + presenceNegJava) / (absencePosJava / absencePosJava + absenceNegJava)
-		
-		# cppSensitivity = presencePosCpp / (presencePosCpp+presenceNegCpp)
-		# cppSpecificity = absenceNegCpp / (absenceNegCpp+absencePosCpp)
-		# cppRateFalsePos = absencePosCpp / (absencePosCpp+absenceNegCpp)
-		# cppRateFalseNeg = presenceNegCpp / (presenceNegCpp+presencePosCpp)
-		# cppPosPredict = presencePos / (presencePos+ absencePos)
-		# cppNegPredict = presenceNeg / (presenceNeg+absenceNeg)
-		# cppRelativeRisk = (presencePosCpp/ presencePosCpp + presenceNegCpp) / (absencePosCpp / absencePosCpp + absenceNegCpp)
+	analyticsString = 'Java\n------\nTrue Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nTrue Negative: {}'.format(presencePosJava,presenceNegJava,absencePosJava,absenceNegJava)
+	analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(javaSensitivity, javaSpecificity)
+	analyticsString += '\nRate False Positives: {}\nRate False Negatives: {}'.format(javaRateFalsePos, javaRateFalseNeg)
+	analyticsString += '\nEstimate Positive Predictive Value: {}\nEstimate Negative Predictive Value: {}'.format(javaPosPredict, javaNegPredict)
+	analyticsString += '\nRelative Risk: {}'.format(javaRelativeRisk)
 
-		analyticsString = 'Java\n------\nPresence Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nAbsence Negative: {}\n'.format(presencePosJava,presenceNegJava,absencePosJava,absenceNegJava)
-		# analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(javaSensitivity, javaSpecificity)
-		# analyticsString += '\nRate False Positives: {}\nRate False Negatives: {}'.format(javaRateFalsePos, javaRateFalseNeg)
-		# analyticsString += '\nEstimate Positive Predictive Value: {}\nEstimate Negative Predictive Value: {}'.format(javaPosPredict, javaNegPredict)
-		# analyticsString += '\nRelative Risk: {}'.format(javaRelativeRisk)
-
-		analyticsString += '\n\nC++\n------\nPresence Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nAbsence Negative: {}'.format(presencePosCpp,presenceNegCpp,absencePosCpp,absenceNegCpp)
-		# analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(cppSensitivity, cppSpecificity)
-		# analyticsString += '\nRate False Positives: {}\nRate False Negatives: {}'.format(cppRateFalsePos, cppRateFalseNeg)
-		# analyticsString += '\nEstimate Positive Predictive Value: {}\nEstimate Negative Predictive Value: {}'.format(cppPosPredict, cppNegPredict)
-		# analyticsString += '\nRelative Risk: {}'.format(cppRelativeRisk)
+	analyticsString += '\n\nC++\n------\nTrue Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nTrue Negative: {}'.format(presencePosCpp,presenceNegCpp,absencePosCpp,absenceNegCpp)
+	analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(cppSensitivity, cppSpecificity)
+	analyticsString += '\nRate False Positives: {}\nRate False Negatives: {}'.format(cppRateFalsePos, cppRateFalseNeg)
+	analyticsString += '\nEstimate Positive Predictive Value: {}\nEstimate Negative Predictive Value: {}'.format(cppPosPredict, cppNegPredict)
+	analyticsString += '\nRelative Risk: {}'.format(cppRelativeRisk)
 
 
 #############################################################################################

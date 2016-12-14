@@ -1,0 +1,28 @@
+Java
+------
+Presence Positive: 6163
+False Negative: 2622
+False Positive: 1
+Absence Negative: 1
+
+Sensitivity: 0.7015367103016505
+Specificity: 0.5
+Rate False Positives: 0.5
+Rate False Negatives: 0.29846328969834945
+Estimate Positive Predictive Value: 0.9998377676833226
+Estimate Negative Predictive Value: 0.9996187571483035
+Relative Risk: 1311.5
+
+C++
+------
+Presence Positive: 24
+False Negative: 23
+False Positive: 2044
+Absence Negative: 6696
+Sensitivity: 0.5106382978723404
+Specificity: 0.7661327231121281
+Rate False Positives: 0.23386727688787184
+Rate False Negatives: 0.48936170212765956
+Estimate Positive Predictive Value: 0.01160541586073501
+Estimate Negative Predictive Value: 0.0034231284417324008
+Relative Risk: 0.003583694191428998
