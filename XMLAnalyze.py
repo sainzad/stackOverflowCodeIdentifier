@@ -152,6 +152,15 @@ if __name__ == '__main__':
 				elif cppValue != None and javaValue == None:
 					cpp += 1
 			
+			# if hit values are the same make a guess on language
+			if java == cpp:
+				ran  = randint(0,1)
+				print(ran)
+				if(ran == 0):
+					java += 1
+				else:
+					cpp += 1
+
 			# Done looking for gram hit values
 			#################################
 			# fix absence
@@ -168,13 +177,7 @@ if __name__ == '__main__':
 			# if no values where hit then move on to next post row
 			# if java == 0 and cpp == 0:
 			# 	continue
-			# if hit values are the same make a guess on language
-			elif java == cpp:
-				ran  = randint(0,1)
-				if(ran == 0):
-					java += 1
-				else:
-					cpp += 1
+			
 			
 			resultsFileString = resultsFileString+'Grams assigned as followed:\n'
 			resultsFileString = resultsFileString+'PostId: {}\nC++: {} Java: {}\nCode: {} \n'.format(postId,cpp,java,codeString)
