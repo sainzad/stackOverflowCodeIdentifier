@@ -76,8 +76,8 @@ if __name__ == '__main__':
 
 	resultsFileString = codeFileString = analyticsString = ''
 
-	presencePosCpp = presenceNegCpp = absencePosCpp = absenceNegCpp =1
-	presencePosJava = presenceNegJava = absencePosJava = absenceNegJava = 1
+	presencePosCpp = presenceNegCpp = absencePosCpp = absenceNegCpp =0
+	presencePosJava = presenceNegJava = absencePosJava = absenceNegJava = 0
 
 	# tree = ET.parse(xmldoc)
 	# root = tree.getroot()
@@ -119,7 +119,7 @@ if __name__ == '__main__':
 
 			codeLength = len(codeString.split())
 			# print(codeLength)
-			if(codeLength < 5):
+			if(codeLength < 3):
 				continue
 
 			totalEval += 1# total posts not skipped
@@ -131,7 +131,7 @@ if __name__ == '__main__':
 				totalJavaTags += 1
 
 			# print(codeString)
-			codeList = ngrams(codeString.split(' '),3)
+			codeList = ngrams(codeString.split(' '),5)
 			codeGram = nltk.FreqDist(codeList)
 			
 
@@ -141,23 +141,40 @@ if __name__ == '__main__':
 
 
 				if cppValue != None and javaValue != None:
+					# Compare to the frequency values
 					if cppValue > javaValue:
 						cpp += 1
 					else:
 						java += 1
+				# if there is a hit for either one then add to hit value
 				elif cppValue == None and javaValue != None:
 					java += 1
 				elif cppValue != None and javaValue == None:
 					cpp += 1
 			
-				if java == 0 and cpp == 0:
-					continue
-				elif java == cpp:
-					ran  = randint(0,1)
-					if(ran == 0):
-						java += 1
-					else:
-						cpp += 1
+			# Done looking for gram hit values
+			#################################
+			# fix absence
+			#################################
+			if java == 0 and ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+				absenceNegJava += 1
+			if cpp == 0 and ('c++' or '<c++-faq>' or '<c>') in tags:
+				absenceNegCpp += 1
+			if java > cpp and not ('<java>' or '<android>' or '<spring>' or '<swing>')  in tags:
+				absencePosJava += 1
+			if cpp > java and not ('c++' or '<c++-faq>' or '<c>') in tags:
+				absencePosCpp += 1
+			#################################
+			# if no values where hit then move on to next post row
+			# if java == 0 and cpp == 0:
+			# 	continue
+			# if hit values are the same make a guess on language
+			elif java == cpp:
+				ran  = randint(0,1)
+				if(ran == 0):
+					java += 1
+				else:
+					cpp += 1
 			
 			resultsFileString = resultsFileString+'Grams assigned as followed:\n'
 			resultsFileString = resultsFileString+'PostId: {}\nC++: {} Java: {}\nCode: {} \n'.format(postId,cpp,java,codeString)
@@ -182,15 +199,15 @@ if __name__ == '__main__':
 				else:
 					# false negative
 					presenceNegCpp += 1
-			elif cpp > java:
-				# been determined cpp but no cpp tags
-				# incorectly determined
-				# false positive
-				absencePosCpp += 1
-			else:
-				# determined not to be cpp correctly
-				# true negative
-				absenceNegCpp += 1
+			# elif cpp > java:
+			# 	# been determined cpp but no cpp tags
+			# 	# incorectly determined
+			# 	# false positive
+			# 	absencePosCpp += 1
+			# else:
+			# 	# determined not to be cpp correctly
+			# 	# true negative
+			# 	absenceNegCpp += 1
 			
 			if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
 				# presence is true
@@ -198,11 +215,10 @@ if __name__ == '__main__':
 					presencePosJava += 1
 				else:
 					presenceNegJava += 1
-			elif java > cpp:
-				absencePosJava += 1
-			else: 
-				absenceNegJava += 1
-
+			# elif java > cpp:
+			# 	absencePosJava += 1
+			# else: 
+			# 	absenceNegJava += 1
 
 			java = 0
 			cpp = 0
@@ -214,13 +230,14 @@ if __name__ == '__main__':
 				del ancestor.getparent()[0]
 
 
+	# absencePosJava = 1
 	javaSensitivity = presencePosJava / (presencePosJava+presenceNegJava)
 	javaSpecificity = absenceNegJava / (absenceNegJava+absencePosJava)
 	javaRateFalsePos = absencePosJava / (absencePosJava+absenceNegJava)
 	javaRateFalseNeg = presenceNegJava / (presenceNegJava+presencePosJava)
 	javaPosPredict = presencePosJava / (presencePosJava+ absencePosJava)
 	javaNegPredict = presenceNegJava / (presenceNegJava+ absenceNegJava)
-	javaRelativeRisk = (presencePosJava/ presencePosJava + presenceNegJava) / (absencePosJava / absencePosJava + absenceNegJava)
+	# javaRelativeRisk = (presencePosJava/ presencePosJava + presenceNegJava) / (absencePosJava / absencePosJava + absenceNegJava)
 	
 	cppSensitivity = presencePosCpp / (presencePosCpp+presenceNegCpp)
 	cppSpecificity = absenceNegCpp / (absenceNegCpp+absencePosCpp)
@@ -234,7 +251,7 @@ if __name__ == '__main__':
 	analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(javaSensitivity, javaSpecificity)
 	analyticsString += '\nRate False Positives: {}\nRate False Negatives: {}'.format(javaRateFalsePos, javaRateFalseNeg)
 	analyticsString += '\nEstimate Positive Predictive Value: {}\nEstimate Negative Predictive Value: {}'.format(javaPosPredict, javaNegPredict)
-	analyticsString += '\nRelative Risk: {}'.format(javaRelativeRisk)
+	# analyticsString += '\nRelative Risk: {}'.format(javaRelativeRisk)
 
 	analyticsString += '\n\nC++\n------\nTrue Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nTrue Negative: {}'.format(presencePosCpp,presenceNegCpp,absencePosCpp,absenceNegCpp)
 	analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(cppSensitivity, cppSpecificity)

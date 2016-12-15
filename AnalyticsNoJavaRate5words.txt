@@ -1,0 +1,26 @@
+Java
+------
+True Positive: 13879
+False Negative: 9959
+False Positive: 0
+True Negative: 16857
+Sensitivity: 0.5822216628911822
+Specificity: 1.0
+Rate False Positives: 0.0
+Rate False Negatives: 0.41777833710881784
+Estimate Positive Predictive Value: 1.0
+Estimate Negative Predictive Value: 0.3713827565632458
+
+C++
+------
+True Positive: 80
+False Negative: 64
+False Positive: 2043
+True Negative: 116
+Sensitivity: 0.5555555555555556
+Specificity: 0.053728578045391384
+Rate False Positives: 0.9462714219546086
+Rate False Negatives: 0.4444444444444444
+Estimate Positive Predictive Value: 0.037682524729156855
+Estimate Negative Predictive Value: 0.35555555555555557
+Relative Risk: 0.5555555555555556
