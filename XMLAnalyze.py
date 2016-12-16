@@ -93,8 +93,8 @@ if __name__ == '__main__':
 				continue
 			
 			tags.lower()
-			if not ('<java>' or 'c++' or '<c>' or '<c++-faq>' or '<android>' or '<spring>' or '<swing>') in tags:
-				continue
+			# if not ('<java>' or 'c++' or '<c>' or '<c++-faq>' or '<android>' or '<spring>' or '<swing>' or '<pass-by-reference>' or '<eclipse>' or '<regex>' or '<recursion>' or '<binary-tree>' or '<software-engineering>' or '<divide-by-zero>' or '<arraylist>' or '<garbage-collection>' or '<object>' or '<arrays>' or '<iterator>' or '<hashcode>' or '<inheritance>' or '<tostring>' or '<unicode>' or '<quicksort>' or '<sorting>' or '<jar>' or '<bubble-sort>' or '<hashcode>' or '<multidimensional-array>' or '<codebase>' or '<class>') in tags:
+			# 	continue
 
 			# Skip if post contains tags from multiple languauges
 			# if (('<c++>' or '<c++-faq>' or '<c>' in tags) and ('<java>' or '<android>' or '<spring>' or '<swing>' in tags)) :
@@ -155,7 +155,6 @@ if __name__ == '__main__':
 			# if hit values are the same make a guess on language
 			if java == cpp:
 				ran  = randint(0,1)
-				print(ran)
 				if(ran == 0):
 					java += 1
 				else:
@@ -165,60 +164,82 @@ if __name__ == '__main__':
 			#################################
 			# fix absence
 			#################################
-			if java == 0 and ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
-				absenceNegJava += 1
-			if cpp == 0 and ('c++' or '<c++-faq>' or '<c>') in tags:
-				absenceNegCpp += 1
-			if java > cpp and not ('<java>' or '<android>' or '<spring>' or '<swing>')  in tags:
-				absencePosJava += 1
-			if cpp > java and not ('c++' or '<c++-faq>' or '<c>') in tags:
-				absencePosCpp += 1
+			# if java == 0 and ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+			# 	absenceNegJava += 1
+			# if cpp == 0 and ('c++' or '<c++-faq>' or '<c>') in tags:
+			# 	absenceNegCpp += 1
+			# if java > cpp and not ('java' or '<android>' or '<spring>' or '<swing>')  in tags:
+			# 	print('absence is true')
+			# 	absencePosJava += 1
+			# if cpp > java and not ('c++' or '<c++-faq>' or '<c>') in tags:
+			# 	absencePosCpp += 1
 			#################################
 			# if no values where hit then move on to next post row
 			# if java == 0 and cpp == 0:
 			# 	continue
 			
-			
+			determinedCpp = determinedJava = False
+
 			resultsFileString = resultsFileString+'Grams assigned as followed:\n'
 			resultsFileString = resultsFileString+'PostId: {}\nC++: {} Java: {}\nCode: {} \n'.format(postId,cpp,java,codeString)
 			if cpp > java:
 				resultsFileString = resultsFileString+'Snippet determined to be C++\nTags include {}\n\n'.format(tags)
-				if ('c++' or '<c++-faq>' or '<c>') in tags:
-					totalCppWithTag += 1
+				determinedCpp = True
+				# if ('c++' or '<c++-faq>' or '<c>') in tags:
+				# 	totalCppWithTag += 1
 			elif java > cpp:
-				
 				resultsFileString = resultsFileString+'Snippet determined to be Java\nTags include {}\n\n'.format(tags)
-				if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
-					totalJavaWithTag += 1
+				determinedJava = True
+				# if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+				# 	totalJavaWithTag += 1
 			
 			# analyze results
-
-			if ('c++' or '<c++-faq>' or '<c>') in tags:
-				# presence is true
-				if cpp > java:
-					# positive is true
-					# true positive
-					presencePosCpp += 1
-				else:
-					# false negative
-					presenceNegCpp += 1
-			# elif cpp > java:
-			# 	# been determined cpp but no cpp tags
-			# 	# incorectly determined
-			# 	# false positive
-			# 	absencePosCpp += 1
-			# else:
-			# 	# determined not to be cpp correctly
-			# 	# true negative
-			# 	absenceNegCpp += 1
 			
-			if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
-				# presence is true
-				if java > cpp:
-					presencePosJava += 1
-				else:
-					presenceNegJava += 1
-			# elif java > cpp:
+			if determinedCpp == True and ('c++' or '<c++-faq>' or '<c>') in tags:
+				presencePosCpp += 1
+			if determinedCpp == False and ('c++' or '<c++-faq>' or '<c>') in tags:
+				presenceNegCpp += 1
+			if determinedCpp == True and not('c++' or '<c++-faq>' or '<c>') in tags:
+				absencePosCpp += 1
+			if determinedCpp == False and not('c++' or '<c++-faq>' or '<c>') in tags:
+				absenceNegCpp += 1
+
+			if determinedJava == True and ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+				presencePosJava += 1
+			if determinedJava == False and ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+				presenceNegJava += 1
+			if determinedJava == True and not('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+				absencePosJava += 1
+			if determinedJava == False and not('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+				absenceNegJava += 1
+
+
+			# if ('c++' or '<c++-faq>' or '<c>') in tags:
+			# 	# presence is true
+			# 	if cpp > java:
+			# 		# positive is true
+			# 		# true positive
+			# 		presencePosCpp += 1
+			# 	else:
+			# 		# false negative
+			# 		presenceNegCpp += 1
+			# # elif cpp > java:
+			# # 	# been determined cpp but no cpp tags
+			# # 	# incorectly determined
+			# # 	# false positive
+			# # 	absencePosCpp += 1
+			# # else:
+			# # 	# determined not to be cpp correctly
+			# # 	# true negative
+			# # 	absenceNegCpp += 1
+			
+			# if ('<java>' or '<android>' or '<spring>' or '<swing>') in tags:
+			# 	# presence is true
+			# 	if java > cpp:
+			# 		presencePosJava += 1
+			# 	else:
+			# 		presenceNegJava += 1
+			# # elif java > cpp:
 			# 	absencePosJava += 1
 			# else: 
 			# 	absenceNegJava += 1
@@ -233,14 +254,14 @@ if __name__ == '__main__':
 				del ancestor.getparent()[0]
 
 
-	# absencePosJava = 1
+	
 	javaSensitivity = presencePosJava / (presencePosJava+presenceNegJava)
 	javaSpecificity = absenceNegJava / (absenceNegJava+absencePosJava)
 	javaRateFalsePos = absencePosJava / (absencePosJava+absenceNegJava)
 	javaRateFalseNeg = presenceNegJava / (presenceNegJava+presencePosJava)
 	javaPosPredict = presencePosJava / (presencePosJava+ absencePosJava)
 	javaNegPredict = presenceNegJava / (presenceNegJava+ absenceNegJava)
-	# javaRelativeRisk = (presencePosJava/ presencePosJava + presenceNegJava) / (absencePosJava / absencePosJava + absenceNegJava)
+	javaRelativeRisk = (presencePosJava/ (presencePosJava + presenceNegJava)) / (absencePosJava / (absencePosJava + absenceNegJava))
 	
 	cppSensitivity = presencePosCpp / (presencePosCpp+presenceNegCpp)
 	cppSpecificity = absenceNegCpp / (absenceNegCpp+absencePosCpp)
@@ -248,13 +269,13 @@ if __name__ == '__main__':
 	cppRateFalseNeg = presenceNegCpp / (presenceNegCpp+presencePosCpp)
 	cppPosPredict = presencePosCpp / (presencePosCpp+ absencePosCpp)
 	cppNegPredict = presenceNegCpp / (presenceNegCpp+absenceNegCpp)
-	cppRelativeRisk = (presencePosCpp/ presencePosCpp + presenceNegCpp) / (absencePosCpp / absencePosCpp + absenceNegCpp)
+	cppRelativeRisk = (presencePosCpp/ (presencePosCpp + presenceNegCpp)) / (absencePosCpp / (absencePosCpp + absenceNegCpp))
 
 	analyticsString = 'Java\n------\nTrue Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nTrue Negative: {}'.format(presencePosJava,presenceNegJava,absencePosJava,absenceNegJava)
 	analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(javaSensitivity, javaSpecificity)
 	analyticsString += '\nRate False Positives: {}\nRate False Negatives: {}'.format(javaRateFalsePos, javaRateFalseNeg)
 	analyticsString += '\nEstimate Positive Predictive Value: {}\nEstimate Negative Predictive Value: {}'.format(javaPosPredict, javaNegPredict)
-	# analyticsString += '\nRelative Risk: {}'.format(javaRelativeRisk)
+	analyticsString += '\nRelative Risk: {}'.format(javaRelativeRisk)
 
 	analyticsString += '\n\nC++\n------\nTrue Positive: {}\nFalse Negative: {}\nFalse Positive: {}\nTrue Negative: {}'.format(presencePosCpp,presenceNegCpp,absencePosCpp,absenceNegCpp)
 	analyticsString += '\nSensitivity: {}\nSpecificity: {}'.format(cppSensitivity, cppSpecificity)
@@ -271,8 +292,8 @@ if __name__ == '__main__':
 	codeFile.write(codeFileString)
 	analyticsFile.write(analyticsString)
 
-	print('Total Java snippets determined and also have tags (java, android, spring, swing): {}'.format(totalJavaWithTag))
-	print('Total Java snippets: {}'.format(totalJavaTags))
-	print('Total C++ snippets determined and also have tags (c++, c++-faq, c): {}'.format(totalCppWithTag))
-	print('Total C++ snippets: {}'.format(totalCppTags))
-	print('Total snippets evaluated: {}'.format(totalEval))
+	# print('Total Java snippets determined and also have tags (java, android, spring, swing): {}'.format(totalJavaWithTag))
+	# print('Total Java snippets: {}'.format(totalJavaTags))
+	# print('Total C++ snippets determined and also have tags (c++, c++-faq, c): {}'.format(totalCppWithTag))
+	# print('Total C++ snippets: {}'.format(totalCppTags))
+	# print('Total snippets evaluated: {}'.format(totalEval))
